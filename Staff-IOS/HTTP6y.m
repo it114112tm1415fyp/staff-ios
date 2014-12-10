@@ -2,24 +2,11 @@
 //  HTTP6y.m
 //  Staff-IOS
 //
-//  Created by Patrick Lo on 9/12/14.
-//  Copyright (c) 2014 ___LoKiFunG___. All rights reserved.
+//  Created by tlsv6y on 9/12/14.
+//  Copyright (c) 2014 tlsv6y. All rights reserved.
 //
 
 #import "HTTP6y.h"
-
-/*Cache-Control → max-age=0, private, must-revalidate
- Connection → Keep-Alive
- Content-Length → 274
- Content-Type → application/json; charset=utf-8
- Date → Tue, 09 Dec 2014 08:11:38 GMT
- Etag → "94379f78a6f23890017ff27255839665"
- Server → WEBrick/1.3.1 (Ruby/2.1.3/2014-09-19)
- X-Content-Type-Options → nosniff
- X-Frame-Options → SAMEORIGIN
- X-Request-Id → cd1e85e9-b40a-4e60-8290-2a8e68d19f82
- X-Runtime → 0.208000
- X-Xss-Protection → 1; mode=block*/
 
 static NSDictionary* cookie;
 static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
