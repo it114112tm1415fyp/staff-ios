@@ -14,6 +14,11 @@
 		ED9E5EA61A38130800350588 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED9E5EA51A38130800350588 /* Images.xcassets */; };
 		ED9E5EA91A38130800350588 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED9E5EA71A38130800350588 /* LaunchScreen.xib */; };
 		ED9E5EB51A38130800350588 /* Staff_IOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EB41A38130800350588 /* Staff_IOSTests.m */; };
+		ED9E5EC81A3813D900350588 /* BeltControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EBF1A3813D900350588 /* BeltControllerViewController.m */; };
+		ED9E5EC91A3813D900350588 /* Good.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EC11A3813D900350588 /* Good.m */; };
+		ED9E5ECA1A3813D900350588 /* HTTP6y.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EC31A3813D900350588 /* HTTP6y.m */; };
+		ED9E5ECB1A3813D900350588 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EC51A3813D900350588 /* MenuViewController.m */; };
+		ED9E5ECC1A3813D900350588 /* QRCodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EC71A3813D900350588 /* QRCodeScannerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,16 @@
 		ED9E5EAE1A38130800350588 /* Staff-IOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Staff-IOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED9E5EB31A38130800350588 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED9E5EB41A38130800350588 /* Staff_IOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Staff_IOSTests.m; sourceTree = "<group>"; };
+		ED9E5EBE1A3813D900350588 /* BeltControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeltControllerViewController.h; sourceTree = "<group>"; };
+		ED9E5EBF1A3813D900350588 /* BeltControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeltControllerViewController.m; sourceTree = "<group>"; };
+		ED9E5EC01A3813D900350588 /* Good.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good.h; sourceTree = "<group>"; };
+		ED9E5EC11A3813D900350588 /* Good.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good.m; sourceTree = "<group>"; };
+		ED9E5EC21A3813D900350588 /* HTTP6y.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTP6y.h; sourceTree = "<group>"; };
+		ED9E5EC31A3813D900350588 /* HTTP6y.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTP6y.m; sourceTree = "<group>"; };
+		ED9E5EC41A3813D900350588 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		ED9E5EC51A3813D900350588 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		ED9E5EC61A3813D900350588 /* QRCodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScannerViewController.h; sourceTree = "<group>"; };
+		ED9E5EC71A3813D900350588 /* QRCodeScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScannerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +96,16 @@
 		ED9E5E971A38130800350588 /* Staff-IOS */ = {
 			isa = PBXGroup;
 			children = (
+				ED9E5EBE1A3813D900350588 /* BeltControllerViewController.h */,
+				ED9E5EBF1A3813D900350588 /* BeltControllerViewController.m */,
+				ED9E5EC01A3813D900350588 /* Good.h */,
+				ED9E5EC11A3813D900350588 /* Good.m */,
+				ED9E5EC21A3813D900350588 /* HTTP6y.h */,
+				ED9E5EC31A3813D900350588 /* HTTP6y.m */,
+				ED9E5EC41A3813D900350588 /* MenuViewController.h */,
+				ED9E5EC51A3813D900350588 /* MenuViewController.m */,
+				ED9E5EC61A3813D900350588 /* QRCodeScannerViewController.h */,
+				ED9E5EC71A3813D900350588 /* QRCodeScannerViewController.m */,
 				ED9E5E9C1A38130800350588 /* AppDelegate.h */,
 				ED9E5E9D1A38130800350588 /* AppDelegate.m */,
 				ED9E5E9F1A38130800350588 /* ViewController.h */,
@@ -219,9 +244,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED9E5EC91A3813D900350588 /* Good.m in Sources */,
 				ED9E5EA11A38130800350588 /* ViewController.m in Sources */,
 				ED9E5E9E1A38130800350588 /* AppDelegate.m in Sources */,
 				ED9E5E9B1A38130800350588 /* main.m in Sources */,
+				ED9E5ECB1A3813D900350588 /* MenuViewController.m in Sources */,
+				ED9E5ECA1A3813D900350588 /* HTTP6y.m in Sources */,
+				ED9E5EC81A3813D900350588 /* BeltControllerViewController.m in Sources */,
+				ED9E5ECC1A3813D900350588 /* QRCodeScannerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +444,7 @@
 				ED9E5EBA1A38130800350588 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ED9E5EBB1A38130800350588 /* Build configuration list for PBXNativeTarget "Staff-IOSTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +453,7 @@
 				ED9E5EBD1A38130800350588 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

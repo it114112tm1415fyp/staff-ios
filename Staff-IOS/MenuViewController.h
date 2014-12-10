@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  UINavigationController+MenuViewController.h
 //  Staff-IOS
 //
 //  Created by Patrick Lo on 4/12/14.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
+@interface MenuViewController : UINavigationController
 
 @end
-
