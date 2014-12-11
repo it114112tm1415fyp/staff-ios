@@ -162,7 +162,7 @@
             </objects>
             <point key="canvasLocation" x="130" y="220"/>
         </scene>
-        <!--QR Code Scanner-->
+        <!--Scan Mode-->
         <scene sceneID="qpg-Kh-reM">
             <objects>
                 <viewController id="Itf-7r-dd7" sceneMemberID="viewController">
@@ -195,13 +195,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="QR Code Scanner" id="J2R-qS-KrD"/>
+                    <navigationItem key="navigationItem" title="Scan Mode" id="J2R-qS-KrD"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="acA-jx-bE9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1278" y="1077"/>
         </scene>
-        <!--Belt Controller-->
+        <!--Belt List-->
         <scene sceneID="mzs-9u-zqX">
             <objects>
                 <tableViewController id="1Wv-zU-syv" customClass="ChooseBeltControllerTableViewController" sceneMemberID="viewController">
@@ -225,7 +225,7 @@
                             <outlet property="delegate" destination="1Wv-zU-syv" id="2Oz-dW-0Wg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Belt Controller" id="he7-OK-hGm"/>
+                    <navigationItem key="navigationItem" title="Belt List" id="he7-OK-hGm"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEv-oq-Xyt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -805,7 +805,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Belt Controller" image="controllerIcon" id="fRd-9u-Cnb"/>
-                    <navigationItem key="navigationItem" id="vWI-RM-YJQ"/>
+                    <navigationItem key="navigationItem" title="Belt Controller" id="vWI-RM-YJQ"/>
                     <connections>
                         <outlet property="cd1BackwardButton" destination="WHg-sL-XIA" id="Em3-Hh-4Dp"/>
                         <outlet property="cd1ForwardButton" destination="vaH-wc-RGY" id="kKX-UB-7zy"/>
@@ -857,7 +857,7 @@
             </objects>
             <point key="canvasLocation" x="-1015" y="1077"/>
         </scene>
-        <!--QRCode Scanner-->
+        <!--QR Code Scanner-->
         <scene sceneID="P1j-UJ-p0R">
             <objects>
                 <viewController id="jjC-aO-xz5" customClass="QRCodeScannerViewController" sceneMemberID="viewController">
@@ -1106,7 +1106,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="QRCode Scanner" id="wYv-hl-XU8"/>
-                    <navigationItem key="navigationItem" id="dJf-Sa-b72"/>
+                    <navigationItem key="navigationItem" title="QR Code Scanner" id="dJf-Sa-b72"/>
                     <connections>
                         <outlet property="idLabel" destination="laa-MA-LjZ" id="qZQ-zI-8j2"/>
                         <outlet property="scanButton" destination="Yoq-dy-01d" id="GIx-1g-1EL"/>
