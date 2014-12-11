@@ -18,5 +18,9 @@
 + (void) setRegisterDate:(NSString*)staffDataRegisterDate;
 + (NSString*) getLastModifyTime;
 + (void) setLastModifyTime:(NSString*)staffDataLastModifyTime;
++ (NSString*) getUsername;
++ (void) setUsername:(NSString*)staffDataUsername;
++ (NSString*) getPassword;
++ (void) setPassword:(NSString*)staffDataPassword;
 
 @end
