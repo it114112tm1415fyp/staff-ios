@@ -14,5 +14,6 @@
 + (NSDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters;
 + (NSDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters customParameters:(NSString*)customParameters;
 + (NSDictionary*)staffLoginWithUsername:(NSString*)username password:(NSString*)password;
++ (NSDictionary*)conveyorGetList;
 
 @end
