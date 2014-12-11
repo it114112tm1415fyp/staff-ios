@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED9E5E9B1A38130800350588 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5E9A1A38130800350588 /* main.m */; };
 		ED9E5E9E1A38130800350588 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5E9D1A38130800350588 /* AppDelegate.m */; };
-		ED9E5EA11A38130800350588 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EA01A38130800350588 /* ViewController.m */; };
+		ED9E5EA11A38130800350588 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EA01A38130800350588 /* LoginViewController.m */; };
 		ED9E5EA41A38130800350588 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED9E5EA21A38130800350588 /* Main.storyboard */; };
 		ED9E5EA61A38130800350588 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED9E5EA51A38130800350588 /* Images.xcassets */; };
 		ED9E5EA91A38130800350588 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED9E5EA71A38130800350588 /* LaunchScreen.xib */; };
@@ -19,6 +19,9 @@
 		ED9E5ECA1A3813D900350588 /* HTTP6y.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EC31A3813D900350588 /* HTTP6y.m */; };
 		ED9E5ECB1A3813D900350588 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EC51A3813D900350588 /* MenuViewController.m */; };
 		ED9E5ECC1A3813D900350588 /* QRCodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EC71A3813D900350588 /* QRCodeScannerViewController.m */; };
+		ED9E5ECF1A38351000350588 /* StaffData.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5ECE1A38351000350588 /* StaffData.m */; };
+		ED9E5ED51A3844A800350588 /* StaffDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5ED41A3844A800350588 /* StaffDetailViewController.m */; };
+		ED9E5ED81A3866B600350588 /* ChooseBeltControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5ED71A3866B600350588 /* ChooseBeltControllerTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +40,8 @@
 		ED9E5E9A1A38130800350588 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED9E5E9C1A38130800350588 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ED9E5E9D1A38130800350588 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ED9E5E9F1A38130800350588 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		ED9E5EA01A38130800350588 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		ED9E5E9F1A38130800350588 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		ED9E5EA01A38130800350588 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		ED9E5EA31A38130800350588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED9E5EA51A38130800350588 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ED9E5EA81A38130800350588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -55,6 +58,12 @@
 		ED9E5EC51A3813D900350588 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		ED9E5EC61A3813D900350588 /* QRCodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScannerViewController.h; sourceTree = "<group>"; };
 		ED9E5EC71A3813D900350588 /* QRCodeScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScannerViewController.m; sourceTree = "<group>"; };
+		ED9E5ECD1A38351000350588 /* StaffData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffData.h; sourceTree = "<group>"; };
+		ED9E5ECE1A38351000350588 /* StaffData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffData.m; sourceTree = "<group>"; };
+		ED9E5ED31A3844A800350588 /* StaffDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffDetailViewController.h; sourceTree = "<group>"; };
+		ED9E5ED41A3844A800350588 /* StaffDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffDetailViewController.m; sourceTree = "<group>"; };
+		ED9E5ED61A3866B600350588 /* ChooseBeltControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseBeltControllerTableViewController.h; sourceTree = "<group>"; };
+		ED9E5ED71A3866B600350588 /* ChooseBeltControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseBeltControllerTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,23 +105,29 @@
 		ED9E5E971A38130800350588 /* Staff-IOS */ = {
 			isa = PBXGroup;
 			children = (
+				ED9E5E9C1A38130800350588 /* AppDelegate.h */,
+				ED9E5E9D1A38130800350588 /* AppDelegate.m */,
 				ED9E5EBE1A3813D900350588 /* BeltControllerViewController.h */,
 				ED9E5EBF1A3813D900350588 /* BeltControllerViewController.m */,
+				ED9E5ED61A3866B600350588 /* ChooseBeltControllerTableViewController.h */,
+				ED9E5ED71A3866B600350588 /* ChooseBeltControllerTableViewController.m */,
 				ED9E5EC01A3813D900350588 /* Good.h */,
 				ED9E5EC11A3813D900350588 /* Good.m */,
 				ED9E5EC21A3813D900350588 /* HTTP6y.h */,
 				ED9E5EC31A3813D900350588 /* HTTP6y.m */,
+				ED9E5EA51A38130800350588 /* Images.xcassets */,
+				ED9E5EA71A38130800350588 /* LaunchScreen.xib */,
+				ED9E5E9F1A38130800350588 /* LoginViewController.h */,
+				ED9E5EA01A38130800350588 /* LoginViewController.m */,
+				ED9E5EA21A38130800350588 /* Main.storyboard */,
 				ED9E5EC41A3813D900350588 /* MenuViewController.h */,
 				ED9E5EC51A3813D900350588 /* MenuViewController.m */,
 				ED9E5EC61A3813D900350588 /* QRCodeScannerViewController.h */,
 				ED9E5EC71A3813D900350588 /* QRCodeScannerViewController.m */,
-				ED9E5E9C1A38130800350588 /* AppDelegate.h */,
-				ED9E5E9D1A38130800350588 /* AppDelegate.m */,
-				ED9E5E9F1A38130800350588 /* ViewController.h */,
-				ED9E5EA01A38130800350588 /* ViewController.m */,
-				ED9E5EA21A38130800350588 /* Main.storyboard */,
-				ED9E5EA51A38130800350588 /* Images.xcassets */,
-				ED9E5EA71A38130800350588 /* LaunchScreen.xib */,
+				ED9E5ECD1A38351000350588 /* StaffData.h */,
+				ED9E5ECE1A38351000350588 /* StaffData.m */,
+				ED9E5ED31A3844A800350588 /* StaffDetailViewController.h */,
+				ED9E5ED41A3844A800350588 /* StaffDetailViewController.m */,
 				ED9E5E981A38130800350588 /* Supporting Files */,
 			);
 			path = "Staff-IOS";
@@ -245,13 +260,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED9E5EC91A3813D900350588 /* Good.m in Sources */,
-				ED9E5EA11A38130800350588 /* ViewController.m in Sources */,
+				ED9E5ED51A3844A800350588 /* StaffDetailViewController.m in Sources */,
+				ED9E5EA11A38130800350588 /* LoginViewController.m in Sources */,
 				ED9E5E9E1A38130800350588 /* AppDelegate.m in Sources */,
+				ED9E5ED81A3866B600350588 /* ChooseBeltControllerTableViewController.m in Sources */,
 				ED9E5E9B1A38130800350588 /* main.m in Sources */,
 				ED9E5ECB1A3813D900350588 /* MenuViewController.m in Sources */,
 				ED9E5ECA1A3813D900350588 /* HTTP6y.m in Sources */,
 				ED9E5EC81A3813D900350588 /* BeltControllerViewController.m in Sources */,
 				ED9E5ECC1A3813D900350588 /* QRCodeScannerViewController.m in Sources */,
+				ED9E5ECF1A38351000350588 /* StaffData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

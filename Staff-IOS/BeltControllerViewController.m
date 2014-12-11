@@ -3,17 +3,18 @@
 //  Staff-IOS
 //
 //  Created by Patrick Lo on 4/12/14.
-//  Copyright (c) 2014 ___LoKiFunG___. All rights reserved.
+//  Copyright (c) 2014 it114112tm1415fyp. All rights reserved.
 //
 
 #import "BeltControllerViewController.h"
 
-@interface BeltControllerViewController ()
+@interface BeltControllerViewController (){
+    NSMutableArray* Array;
+    NSMutableArray* mrImageArray;
+    NSMutableArray* rImageArray;
+}
 @end
 
-NSMutableArray* Array;
-NSMutableArray* mrImageArray;
-NSMutableArray* rImageArray;
 
 int stopperState[8];
 int rollerState[7][4];

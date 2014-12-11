@@ -3,12 +3,12 @@
 //  Staff-IOS
 //
 //  Created by Patrick Lo on 4/12/14.
-//  Copyright (c) 2014 ___LoKiFunG___. All rights reserved.
+//  Copyright (c) 2014 it114112tm1415fyp. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
