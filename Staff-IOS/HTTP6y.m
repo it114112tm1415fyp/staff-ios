@@ -5,7 +5,7 @@
 //  Created by tlsv6y on 9/12/14.
 //  Copyright (c) 2014 it114112tm1415fyp. All rights reserved.
 //
-
+#import <UIKit/UIKit.h>
 #import <CommonCrypto/CommonDigest.h>
 #import "StaffData.h"
 #import "HTTP6y.h"
@@ -50,7 +50,10 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     if([body length] > 0 && error == nil) {
         NSMutableDictionary* jsonObject = [NSJSONSerialization JSONObjectWithData:body options:NSJSONReadingAllowFragments error:&error];
         if(error == nil) {
-            return [self checkResult:jsonObject];
+            if (![self checkResult:jsonObject]) {
+                return [self request:postposition parameters:parameters customParameters:customParameters];
+            }
+            return jsonObject;
         }
     }
     NSLog(@"URL: %@", url);
@@ -70,16 +73,18 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return output;
 }
 
-+ (NSDictionary*)checkResult:(NSDictionary*)result {
++ (BOOL)checkResult:(NSDictionary*)result {
     if([[result objectForKey:@"success"]  isEqual: @(NO)]) {
         NSString* error = [result objectForKey:@"error"];
         if ([error isEqual:@"Connection expired"]) {
-            
-        } else if ([error isEqual:@"Need login"]) {
             [self staffLoginWithUsername:[StaffData getUsername] password:[StaffData getPassword]];
+            return false;
+        } else if ([error isEqual:@"Need login"]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Need Login" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
         }
     }
-    return result;
+    return true;
 }
 
 + (NSDictionary*)staffLoginWithUsername:(NSString*)username password:(NSString*)password {

@@ -25,20 +25,20 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    NSDictionary *object = [HTTP6y conveyorGetList];
-    if (object != nil){
-        NSLog(@"conveyor/get_list : %@",[object objectForKey:@"success"]);
-        if([object objectForKey:@"success"]) {
-            if([object objectForKey:@"list"] != nil){
-                NSMutableArray*list =[[NSMutableArray alloc] initWithArray:[object objectForKey:@"list"]];
+    NSDictionary *result = [HTTP6y conveyorGetList];
+    if (result != nil){
+        NSLog(@"conveyor/get_list : %@",[result objectForKey:@"success"]);
+        if([result objectForKey:@"success"]) {
+            if([result objectForKey:@"list"] != nil){
+                NSMutableArray*list =[[NSMutableArray alloc] initWithArray:[result objectForKey:@"list"]];
                 listOfBelt = [NSMutableArray new];
-                for (int i = 0; i < [object count]; i++) {
+                for (int i = 0; i < [result count]; i++) {
                     [listOfBelt addObject:[list objectAtIndex:i]];
                 }
             }
         } else {
             [[[UIAlertView alloc] initWithTitle:@"Error!"
-                                        message:@"Fail to connect server.\n Please try again later."
+                                        message:[result objectForKey:@"error"]
                                        delegate:self
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil, nil] show];

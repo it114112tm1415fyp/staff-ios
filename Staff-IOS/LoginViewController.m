@@ -48,7 +48,7 @@
                 [self presentViewController:menuView animated:true completion:nil];
             } else {
                 [[[UIAlertView alloc] initWithTitle:@"Error!"
-                                            message:@"Wrong username or password"
+                                            message:[result objectForKey:@"error"]
                                            delegate:self
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil, nil] show];

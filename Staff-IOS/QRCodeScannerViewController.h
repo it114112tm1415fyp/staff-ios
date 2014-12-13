@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *createdTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *updatedTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stateLabel;
 
 @property (nonatomic, strong) NSMutableArray *listOfID;
 @property (nonatomic, strong) NSMutableDictionary *goodDictionary;
