@@ -7,23 +7,24 @@
 //
 
 #import "BeltControllerViewController.h"
-
-@interface BeltControllerViewController (){
+#import "HTTP6y.h"
+@interface BeltControllerViewController ()
+{
     NSMutableArray* Array;
     NSMutableArray* mrImageArray;
     NSMutableArray* rImageArray;
+    
+    int stopperState[8];
+    int rollerState[7][4];
 }
 @end
-
-
-int stopperState[8];
-int rollerState[7][4];
-
 @implementation BeltControllerViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self getControl];
     Array =[[NSMutableArray alloc] initWithObjects:[[NSMutableArray alloc]initWithObjects:_mrStopButton,_mrForwardButton,_mrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_lcrStopButton,_lcrForwardButton,_lcrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_rcrStopButton,_rcrForwardButton,_rcrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd1StopButton,_cd1ForwardButton,_cd1BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd2StopButton,_cd2ForwardButton,_cd2BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd3StopButton,_cd3ForwardButton,_cd3BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd4StopButton,_cd4ForwardButton,_cd4BackwardButton, nil], nil];
 
     mrImageArray = [[NSMutableArray alloc] initWithObjects:@"stop_icon_dis.png",@"cycle_forward_dis.png",@"cycle_backward_dis.png",@"stop_icon.png",@"cycle_forward.png",@"cycle_backward.png", nil];
@@ -37,6 +38,8 @@ int rollerState[7][4];
 - (IBAction)upButtonOnClick:(UIButton *)sender {
     int rollerType = (int) sender.tag / 10 - 1;
     int buttonType = (int) sender.tag % 10 - 4;
+    
+//    [self sendMessageToServerWithClickButton];
     
     NSLog(@"Roller Type = %D Button Type = %d", rollerType, buttonType);
     if (rollerType > 2){
@@ -97,4 +100,74 @@ int rollerState[7][4];
         }
     }
 }
+
+- (void)sendMessageToServerWithClickButton:(NSDictionary *)message
+{
+    NSDictionary *result = [HTTP6y sendMessageWithConvoyerName:_mrForwardButton.textInputContextIdentifier message:@"Clockwise"];
+    if(result !=nil)
+    {
+        if ([[result objectForKey:@"success"] isEqual:@(YES)]) {
+            NSLog(@"Message", [result objectForKey:@"message"]);
+        }
+    }
+}
+- (IBAction)backgroundQueue:(id)sender {
+    
+    // call the same method on a background thread
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [NSThread sleepForTimeInterval:3];
+        
+        
+//        int i = arc4random() % 100;
+        
+        // update UI on the main thread
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.title = [[NSString alloc]initWithFormat:@"Result: %d", i];
+//        });
+//        
+    });
+}
+
+- (void)getControl
+{
+    UIView *beltView = [UIView self];
+    NSDictionary *result = [NSDictionary new];
+    result = [HTTP6y getControlWithBelt:[beltView restorationIdentifier]];
+    NSLog(@"Button ID = %@", result);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end
