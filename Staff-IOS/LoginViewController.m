@@ -28,37 +28,39 @@
 }
 
 - (IBAction)loginButton:(UIButton *)sender {
-//    if ([_usernameTextField.text  isEqual: @""] || [_passwordTextField.text  isEqual: @""]){
-//        [[[UIAlertView alloc] initWithTitle:@"Warming" message:@"Please enter your username and password." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-//    }
-//    else
-//    {
-//        NSDictionary* result = [HTTP6y staffLoginWithUsername:_usernameTextField.text password:_passwordTextField.text];
-//        if (result != nil) {
-//            NSLog(@"account/staff_login : %d",[[result objectForKey:@"success"] isEqual: @(YES)]);
-//            if ([[result objectForKey:@"success"] isEqual: @(YES)]) {
-//                [StaffData setStaffId:[[result objectForKey:@"id"] intValue]];
-//                [StaffData setStaffName:[result objectForKey:@"name"]];
-//                [StaffData setRegisterDate:[result objectForKey:@"register_time"]];
-//                [StaffData setLastModifyTime:[result objectForKey:@"last_modify_time"]];
-//                
-//                MenuViewController *menuView = (MenuViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MenuView"];
-//                [self presentViewController:menuView animated:true completion:nil];
-//            } else {
-//                [[[UIAlertView alloc] initWithTitle:@"Error!"
-//                                            message:@"Wrong username or password"
-//                                           delegate:self
-//                                  cancelButtonTitle:@"OK"
-//                                  otherButtonTitles:nil, nil] show];
-//            }
-//        } else {
-//            [[[UIAlertView alloc] initWithTitle:@"Error!"
-//                                        message:@"Fail to connect server.\n Please try again later."
-//                                       delegate:self
-//                              cancelButtonTitle:@"OK"
-//                              otherButtonTitles:nil, nil] show];
-//        }
-//    }
+    if ([_usernameTextField.text  isEqual: @""] || [_passwordTextField.text  isEqual: @""]){
+        [[[UIAlertView alloc] initWithTitle:@"Warming" message:@"Please enter your username and password." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    }
+    else
+    {
+        NSDictionary* result = [HTTP6y staffLoginWithUsername:_usernameTextField.text password:_passwordTextField.text];
+        if (result != nil) {
+            NSLog(@"account/staff_login : %d",[[result objectForKey:@"success"] isEqual: @(YES)]);
+            if ([[result objectForKey:@"success"] isEqual: @(YES)]) {
+                [StaffData setStaffId:[[result objectForKey:@"id"] intValue]];
+                [StaffData setStaffName:[result objectForKey:@"name"]];
+                [StaffData setRegisterDate:[result objectForKey:@"register_time"]];
+                [StaffData setLastModifyTime:[result objectForKey:@"last_modify_time"]];
+                [StaffData setUsername:_usernameTextField.text];
+                [StaffData setPassword:_passwordTextField.text];
+                
+                MenuViewController *menuView = (MenuViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MenuView"];
+                [self presentViewController:menuView animated:true completion:nil];
+            } else {
+                [[[UIAlertView alloc] initWithTitle:@"Error!"
+                                            message:@"Wrong username or password"
+                                           delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil, nil] show];
+            }
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"Error!"
+                                        message:@"Fail to connect server.\n Please try again later."
+                                       delegate:self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil, nil] show];
+        }
+    }
 }
 
 @end

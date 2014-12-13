@@ -89,6 +89,10 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return [self request:@"account/staff_login" parameters:parameters];
 }
 
++ (NSDictionary*)conveyorGetList {
+    return [self request:@"conveyor/get_list"];
+}
+
 + (NSDictionary *)sendMessageWithConvoyerName:(NSString *)convoyer_name message:(NSString *)message
 {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
