@@ -8,11 +8,12 @@
 
 #import "ChooseActionTableViewController.h"
 #import "QRCodeScannerViewController.h"
+
 @interface ChooseActionTableViewController (){
-    NSMutableArray *listOfAction;
-    NSMutableArray *listOfCar;
-    NSMutableArray *listOfStore;
-    NSMutableArray *listOfFunction;
+    NSArray *action;
+    NSArray *menu;
+    NSInteger selectionIndex;
+    NSString *stakeholderType;
 }
 
 @end
@@ -21,99 +22,61 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    listOfCar = [[NSMutableArray alloc] initWithObjects:@"Car 1",@"Car 2", nil];
-    listOfStore = [[NSMutableArray alloc] initWithObjects:@"Store 1",@"Store 2", nil];
-    listOfAction = [[NSMutableArray alloc] initWithObjects:@"Download Goods From Car",@"Check In Goods To Store", @"Check Storing Goods", @"Check Out Goods From Store", @"Upload Goods To Car", @"Client Sign", nil];
-    listOfFunction = [[NSMutableArray alloc] initWithArray:listOfAction];
+    NSArray *car = [[NSMutableArray alloc] initWithObjects:@"Car 1",@"Car 2", nil];
+    NSArray *store = [[NSMutableArray alloc] initWithObjects:@"Store 1",@"Store 2", nil];
+    action = @[@"inspect", @"warehouse", @"leave", @"load", @"unload", @"receive", @"issue"];
+    menu = @[store, store, store, car, car, @[], @[]];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated{
+    selectionIndex = NSIntegerMax;
+    [self.tableView reloadData];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
+- (NSArray*)submenu {
+    if (selectionIndex == NSIntegerMax)
+        return @[];
+    else
+        return [menu objectAtIndex:selectionIndex];
+}
+
+- (NSArray*)submenu:(NSInteger) index {
+    return [menu objectAtIndex:index];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [listOfFunction count];
+    return action.count + [self submenu].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Action" forIndexPath:indexPath];
-    
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = [listOfFunction objectAtIndex:indexPath.row];
-    return cell;
+    if(indexPath.row > selectionIndex && indexPath.row <= selectionIndex + [self submenu].count) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Submenu" forIndexPath:indexPath];
+        cell.textLabel.text = [[self submenu] objectAtIndex:indexPath.row - selectionIndex - 1];
+        return cell;
+    } else {
+        NSInteger actionIndex = indexPath.row - ( indexPath.row > selectionIndex ? [self submenu].count : 0 );
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self submenu:actionIndex].count == 0 ? @"Submenu" : @"Action" forIndexPath:indexPath];
+        cell.textLabel.text = [action objectAtIndex:actionIndex];
+        return cell;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"%@", [listOfFunction objectAtIndex:indexPath.row]);
-    if ([[listOfFunction objectAtIndex:indexPath.row] isEqual:@"Download Goods From Car"] || [[listOfFunction objectAtIndex:indexPath.row]  isEqual:@"Upload Goods To Car"]){
-        if (![[listOfFunction objectAtIndex:indexPath.row + 1] isEqual:[listOfCar objectAtIndex:0]])
-        {
-            int newIndex = 0;
-            if ([[listOfFunction objectAtIndex:indexPath.row] isEqual:@"Download Goods From Car"])
-                newIndex = 0;
-            else
-                newIndex = 4;
-            
-            listOfFunction = [[NSMutableArray alloc] initWithArray:listOfAction];
-            
-            for (int i = [listOfCar count]; i > 0; i--) {
-                NSLog(@"Add Row");
-                [listOfFunction insertObject:[listOfCar objectAtIndex:i - 1] atIndex:newIndex + 1];
-            }
-        } else {
-            for (int i = [listOfCar count]; i > 0; i--) {
-                [listOfFunction removeObjectAtIndex:indexPath.row + 1];
-            }
-            listOfFunction = [[NSMutableArray alloc] initWithArray:listOfAction];
-        }
-    }
-    else if ([[listOfFunction objectAtIndex:indexPath.row] isEqual:@"Check In Goods To Store"] || [[listOfFunction objectAtIndex:indexPath.row] isEqual:@"Check Storing Goods"] || [[listOfFunction objectAtIndex:indexPath.row] isEqual:@"Check Out Goods From Store"] ){
-        if (![[listOfFunction objectAtIndex:indexPath.row + 1] isEqual:[listOfStore objectAtIndex:0]])
-        {
-            int newIndex = 0;
-            if ([[listOfFunction objectAtIndex:indexPath.row] isEqual:@"Check In Goods To Store"])
-                newIndex = 1;
-            else if ([[listOfFunction objectAtIndex:indexPath.row] isEqual:@"Check Storing Goods"])
-                newIndex = 2;
-            else
-                newIndex = 3;
-            
-            listOfFunction = [[NSMutableArray alloc] initWithArray:listOfAction];
-
-            for (int i = [listOfStore count]; i > 0; i--) {
-                NSLog(@"Add Row");
-                [listOfFunction insertObject:[listOfStore objectAtIndex:i - 1] atIndex:newIndex + 1];
-            }
-        } else {
-            for (int i = [listOfStore count]; i > 0; i--) {
-                [listOfFunction removeObjectAtIndex:indexPath.row + 1];
-            }
-            listOfFunction = [[NSMutableArray alloc] initWithArray:listOfAction];
-        }
-    } else if ([[listOfFunction objectAtIndex:indexPath.row] isEqual:@"Client Sign"]){
-        listOfFunction = [[NSMutableArray alloc] initWithArray:listOfAction];
-        QRCodeScannerViewController *qrCodeScannerViewController = (QRCodeScannerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"qrCodeScanner"];
-        [self.navigationController pushViewController:qrCodeScannerViewController animated:true];
-    }
+    selectionIndex = selectionIndex == indexPath.row ? NSIntegerMax : indexPath.row - ( indexPath.row > selectionIndex ? [self submenu].count : 0 );
+    _selectedAction = [action objectAtIndex:selectionIndex];
     [self.tableView reloadData];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    QRCodeScannerViewController* controller = [segue destinationViewController];
+    UITableViewCell *cell = sender;
+    controller.chooseActionController = self;
+    _selectedStakeholder = cell.textLabel.text;
+}
+
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

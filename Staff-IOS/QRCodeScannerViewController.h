@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "ChooseActionTableViewController.h"
 
 @interface QRCodeScannerViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate>
 
@@ -28,5 +29,7 @@
 
 @property (nonatomic, strong) NSMutableArray *listOfID;
 @property (nonatomic, strong) NSMutableDictionary *goodDictionary;
+
+@property (nonatomic, strong) ChooseActionTableViewController *chooseActionController;
 
 @end

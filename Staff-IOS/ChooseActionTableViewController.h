@@ -10,4 +10,7 @@
 
 @interface ChooseActionTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSString *selectedAction;
+@property (strong, nonatomic) NSString *selectedStakeholder;
+
 @end

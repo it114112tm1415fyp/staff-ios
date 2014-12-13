@@ -37,9 +37,12 @@ Good* good;
     [_scannerState setText:@"Standby..."];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
     [self startReading];
+    NSLog(@"%@",_chooseActionController.selectedAction);
+    NSLog(@"%@",_chooseActionController.selectedStakeholder);
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -49,7 +52,7 @@ Good* good;
 
 -(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft)
-        _videoPreviewView.transform = CGAffineTransformMakeRotation( M_PI_2);
+        _videoPreviewView.transform = CGAffineTransformMakeRotation(M_PI_2);
     else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
         _videoPreviewView.transform = CGAffineTransformMakeRotation(M_PI +M_PI_2);
 
