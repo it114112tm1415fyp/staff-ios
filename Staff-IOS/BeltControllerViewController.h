@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-@interface BeltControllerViewController : UIViewController
+@interface BeltControllerViewController : UIViewController{
+    AppDelegate *delegate;
+}
 @property (weak, nonatomic) IBOutlet UIButton *mrForwardButton;
 @property (weak, nonatomic) IBOutlet UIButton *mrBackwardButton;
 @property (weak, nonatomic) IBOutlet UIButton *mrStopButton;
@@ -36,5 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *cd4ForwardButton;
 @property (weak, nonatomic) IBOutlet UIButton *cd4BackwardButton;
 @property (weak, nonatomic) IBOutlet UIButton *cd4StopButton;
+
+@property (strong, nonatomic) NSString *beltName;
 
 @end

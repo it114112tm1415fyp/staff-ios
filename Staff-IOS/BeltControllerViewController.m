@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"%@", _beltName);
+    
     Array =[[NSMutableArray alloc] initWithObjects:[[NSMutableArray alloc]initWithObjects:_mrStopButton,_mrForwardButton,_mrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_lcrStopButton,_lcrForwardButton,_lcrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_rcrStopButton,_rcrForwardButton,_rcrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd1StopButton,_cd1ForwardButton,_cd1BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd2StopButton,_cd2ForwardButton,_cd2BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd3StopButton,_cd3ForwardButton,_cd3BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd4StopButton,_cd4ForwardButton,_cd4BackwardButton, nil], nil];
 
     mrImageArray = [[NSMutableArray alloc] initWithObjects:@"stop_icon_dis",@"cycle_forward_dis",@"cycle_backward_dis",@"stop_icon",@"cycle_forward",@"cycle_backward", nil];
@@ -32,10 +34,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)upButtonOnClick:(UIButton *)sender {
     int rollerType = (int) sender.tag / 10 - 1;
     int buttonType = (int) sender.tag % 10 - 4;
-    
+    NSLog(@"%@", [sender restorationIdentifier]);
     NSLog(@"Roller Type = %D Button Type = %d", rollerType, buttonType);
     if (rollerType > 2){
         switch (rollerState[rollerType][buttonType]) {

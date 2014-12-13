@@ -7,6 +7,7 @@
 //
 
 #import "ChooseBeltControllerTableViewController.h"
+#import "BeltControllerViewController.h"
 #import "HTTP6y.h"
 
 @interface ChooseBeltControllerTableViewController (){
@@ -81,6 +82,18 @@
     }
     cell.textLabel.text = [listOfBelt objectAtIndex:indexPath.row];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    BeltControllerViewController* nextViewController = [segue destinationViewController];
+    UITableViewCell *cell = sender;
+    nextViewController.beltName = cell.textLabel.text;
 }
 
 /*
