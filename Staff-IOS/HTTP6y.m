@@ -3,10 +3,11 @@
 //  Staff-IOS
 //
 //  Created by tlsv6y on 9/12/14.
-//  Copyright (c) 2014 tlsv6y. All rights reserved.
+//  Copyright (c) 2014 it114112tm1415fyp. All rights reserved.
 //
 
 #import <CommonCrypto/CommonDigest.h>
+#import "StaffData.h"
 #import "HTTP6y.h"
 
 static NSDictionary* cookie;
@@ -75,7 +76,7 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
         if ([error isEqual:@"Connection expired"]) {
             
         } else if ([error isEqual:@"Need login"]) {
-            
+            [self staffLoginWithUsername:[StaffData getUsername] password:[StaffData getPassword]];
         }
     }
     return result;

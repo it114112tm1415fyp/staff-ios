@@ -27,8 +27,8 @@
     [self getControl];
     Array =[[NSMutableArray alloc] initWithObjects:[[NSMutableArray alloc]initWithObjects:_mrStopButton,_mrForwardButton,_mrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_lcrStopButton,_lcrForwardButton,_lcrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_rcrStopButton,_rcrForwardButton,_rcrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd1StopButton,_cd1ForwardButton,_cd1BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd2StopButton,_cd2ForwardButton,_cd2BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd3StopButton,_cd3ForwardButton,_cd3BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd4StopButton,_cd4ForwardButton,_cd4BackwardButton, nil], nil];
 
-    mrImageArray = [[NSMutableArray alloc] initWithObjects:@"stop_icon_dis.png",@"cycle_forward_dis.png",@"cycle_backward_dis.png",@"stop_icon.png",@"cycle_forward.png",@"cycle_backward.png", nil];
-    rImageArray = [[NSMutableArray alloc] initWithObjects:@"stop_icon_dis.png",@"forward_icon_dis.png",@"backward_icon_dis.png",@"stop_icon.png",@"forward_icon.png",@"backward_icon.png", nil];
+    mrImageArray = [[NSMutableArray alloc] initWithObjects:@"stop_icon_dis",@"cycle_forward_dis",@"cycle_backward_dis",@"stop_icon",@"cycle_forward",@"cycle_backward", nil];
+    rImageArray = [[NSMutableArray alloc] initWithObjects:@"stop_icon_dis",@"forward_icon_dis",@"backward_icon_dis",@"stop_icon",@"forward_icon",@"backward_icon", nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,12 +47,12 @@
             case 0:
                 NSLog(@"Roller Type = %d UP%d is ON", rollerType, buttonType);
                 rollerState[rollerType][buttonType] = 1;
-                [sender setImage:[UIImage imageNamed:@"up_icon.png"] forState:UIControlStateNormal];
+                [sender setImage:[UIImage imageNamed:@"up_icon"] forState:UIControlStateNormal];
                 break;
             case 1:
                 NSLog(@"Roller Type = %d UP%d is OFF", rollerType, buttonType);
                 rollerState[rollerType][buttonType] = 0;
-                [sender setImage:[UIImage imageNamed:@"up_icon_dis.png"] forState:UIControlStateNormal];
+                [sender setImage:[UIImage imageNamed:@"up_icon_dis"] forState:UIControlStateNormal];
                 break;
             default:
                 break;
@@ -62,12 +62,12 @@
                 case 0:
                     NSLog(@"Stopper %lD is ON", (long)sender.tag);
                     stopperState[sender.tag - 1] = 1;
-                    [sender setImage:[UIImage imageNamed:@"up_icon.png"] forState:UIControlStateNormal];
+                    [sender setImage:[UIImage imageNamed:@"up_icon"] forState:UIControlStateNormal];
                     break;
                 case 1:
                     NSLog(@"Stopper %lD is OFF", (long)sender.tag);
                     stopperState[sender.tag - 1] = 0;
-                    [sender setImage:[UIImage imageNamed:@"up_icon_dis.png"] forState:UIControlStateNormal];
+                    [sender setImage:[UIImage imageNamed:@"up_icon_dis"] forState:UIControlStateNormal];
                     break;
                 default:
                     break;

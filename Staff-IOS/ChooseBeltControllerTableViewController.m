@@ -3,7 +3,7 @@
 //  Staff-IOS
 //
 //  Created by Patrick Lo on 10/12/14.
-//  Copyright (c) 2014 1415FYP. All rights reserved.
+//  Copyright (c) 2014 it114112tm1415fyp. All rights reserved.
 //
 
 #import "ChooseBeltControllerTableViewController.h"
@@ -25,7 +25,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    NSDictionary *object = [HTTP6y request:@"conveyor/get_list"];
+    NSDictionary *object = [HTTP6y conveyorGetList];
     if (object != nil){
         NSLog(@"conveyor/get_list : %@",[object objectForKey:@"success"]);
         if([object objectForKey:@"success"]) {
