@@ -29,7 +29,7 @@
     NSDictionary *result = [HTTP6y conveyorGetList];
     if (result != nil){
         NSLog(@"conveyor/get_list : %@",[result objectForKey:@"success"]);
-        if([result objectForKey:@"success"]) {
+        if([[result objectForKey:@"success"] isEqual: @(YES)]) {
             if([result objectForKey:@"list"] != nil){
                 NSMutableArray*list =[[NSMutableArray alloc] initWithArray:[result objectForKey:@"list"]];
                 listOfBelt = [NSMutableArray new];

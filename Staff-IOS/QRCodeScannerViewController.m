@@ -136,53 +136,57 @@ Good* good;
             // stop reading and change the bar button item's title and the flag's value.
             // Everything is done on the main thread.
             NSString* qrCodeString = [metadataObj stringValue];
+            NSMutableDictionary *qrCodeResult = [NSJSONSerialization JSONObjectWithData:(NSData*)[qrCodeString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
             if ([_goodDictionary objectForKey:qrCodeString] == nil){
-                NSString *stringFromScanning = [NSString stringWithFormat:@"Item Counting : %lu QRCode : %@", (unsigned long)[_goodDictionary count], qrCodeString];
-                [_scannerState performSelectorOnMainThread:@selector(setText:) withObject:stringFromScanning waitUntilDone:NO];
-                
-//                //TODO Get Good Datail From Server
-//                NSDictionary* result = [HTTP6y request:@"" parameters:@{@"username":qrCodeString}];
-//                if (result != nil) {
-//                    NSLog(@"%@",[result objectForKey:@"success"]);
-//                    if ([result objectForKey:@"success"]) {
-//                        Good* good = [[Good alloc] init];
-//                        good.goodID = 1;
-//                        good.orderID = 1;
-//                        good.rfid = @"";
-//                        good.weigth = 1;
-//                        good.fragile = NO;
-//                        good.flammable = NO;
-//                        good.createdTime = NSDate;
-//                        good.updatedTime = NSDate;
-//                        [_goodDictionary setObject:good forKey:qrCodeString];
-//                        [self performSelectorOnMainThread:@selector(setGoodInformation:) withObject:qrCodeString waitUntilDone:NO];
-//                    } else {
-//                        [[[UIAlertView alloc] initWithTitle:@"Error!"
-//                                                    message:@"Fail to connect server.\n Please try again later."
-//                                                   delegate:self
-//                                          cancelButtonTitle:@"OK"
-//                                          otherButtonTitles:nil, nil] show];
-//                        [self stopReading];
-//                    }
-//                } else {
-//                    [[[UIAlertView alloc] initWithTitle:@"Error!"
-//                                                message:@"Fail to connect server.\n Please try again later."
-//                                               delegate:self
-//                                      cancelButtonTitle:@"OK"
-//                                      otherButtonTitles:nil, nil] show];
-//                    [self stopReading];
-//                }
+                NSLog(@"%@", qrCodeResult);
+                NSNumber *good_id = [qrCodeResult objectForKey:@"id"];
+                NSNumber *order_id = [qrCodeResult objectForKey:@"order_id"];
+                NSString *rfid_tag = [qrCodeResult objectForKey:@"rfid_tag"];
+                NSNumber *weight =[qrCodeResult objectForKey:@"weight"];
+                bool *fragile = (bool)[qrCodeResult objectForKey:@"fragile"];
+                bool *flammable = (bool)[qrCodeResult objectForKey:@"flammable"];
+                NSString *created_at = [qrCodeResult objectForKey:@"created_at"];
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setDateFormat:@"EE, d LLLL yyyy HH:mm:ss Z"];
+                NSDate *date = [dateFormat dateFromString:created_at];
                 
                 Good* good = [[Good alloc] init];
-                good.goodID = 1;
-                good.orderID = 1;
-                good.rfid = @"";
-                good.weigth = 1;
-                good.fragile = NO;
-                good.flammable = NO;
-                //good.createdTime = @"";
-                //good.updatedTime = @"";
+                good.goodID = good_id;
+                good.orderID = order_id;
+                good.rfid = rfid_tag;
+                good.weigth = weight;
+                good.fragile = fragile;
+                good.flammable = flammable;
+                good.createdTime = date;
+                
                 [_goodDictionary setObject:good forKey:qrCodeString];
+                
+                NSDictionary* result = [HTTP6y goodInspect:good_id store_id:[NSNumber numberWithInt:1]];
+                if (result != nil) {
+                    NSLog(@"success : %@",[result objectForKey:@"success"]);
+                    if ([[result objectForKey:@"success"] isEqual: @(YES)]) {
+                        NSLog(@"%@", [result objectForKey:@"update_time"]);
+                        good.updatedTime = [result objectForKey:@"update_time"];
+                    } else {
+                        [[[UIAlertView alloc] initWithTitle:@"Error!"
+                                                    message:@"Fail to connect server.\n Please try again later."
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil] show];
+                        [self stopReading];
+                    }
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"Error!"
+                                                message:@"Fail to connect server.\n Please try again later."
+                                               delegate:self
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil, nil] show];
+                    [self stopReading];
+                }
+                
+                NSString *stringFromScanning = [NSString stringWithFormat:@"Item Counting : %lu QRCode : %@", (unsigned long)[_goodDictionary count] + 1, good_id];
+                [_scannerState performSelectorOnMainThread:@selector(setText:) withObject:stringFromScanning waitUntilDone:NO];
+                
                 [self performSelectorOnMainThread:@selector(setGoodInformation:) withObject:qrCodeString waitUntilDone:NO];
             }
             
@@ -191,29 +195,14 @@ Good* good;
 }
 
 -(void)setGoodInformation:(NSString *)goodsKey{
-    _idLabel.text = [NSString stringWithFormat:@"%d", ((Good *)[_goodDictionary objectForKey:goodsKey]).goodID];
-    NSLog(@"%d", ((Good *)[_goodDictionary objectForKey:goodsKey]).goodID);
-    
-    _orderIDLabel.text = [NSString stringWithFormat:@"%d", ((Good *)[_goodDictionary objectForKey:goodsKey]).orderID];
-    NSLog(@"%d", ((Good *)[_goodDictionary objectForKey:goodsKey]).orderID);
-    
-    _rfidLabel.text = ((Good *)[_goodDictionary objectForKey:goodsKey]).rfid;
-    NSLog(@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).rfid);
-    
-    _weigthLabel.text = [NSString stringWithFormat:@"%f", ((Good *)[_goodDictionary objectForKey:goodsKey]).weigth];
-    NSLog(@"%f", ((Good *)[_goodDictionary objectForKey:goodsKey]).weigth);
-    
+    _idLabel.text = [NSString stringWithFormat:@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).goodID];
+    _orderIDLabel.text = [NSString stringWithFormat:@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).orderID];
+    _rfidLabel.text = [NSString stringWithFormat:@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).rfid];
+    _weigthLabel.text = [NSString stringWithFormat:@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).weigth];
     _fragileLabel.text = [NSString stringWithFormat:@"%d", ((Good *)[_goodDictionary objectForKey:goodsKey]).fragile];
-    NSLog(@"%d", ((Good *)[_goodDictionary objectForKey:goodsKey]).fragile);
-    
     _flammableLabel.text = [NSString stringWithFormat:@"%d", ((Good *)[_goodDictionary objectForKey:goodsKey]).flammable];
-    NSLog(@"%d", ((Good *)[_goodDictionary objectForKey:goodsKey]).flammable);
-    
     _createdTimeLabel.text = [NSString stringWithFormat:@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).createdTime];
-    NSLog(@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).createdTime);
-    
     _updatedTimeLabel.text = [NSString stringWithFormat:@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).updatedTime];
-    NSLog(@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).updatedTime);
 }
 
 /*

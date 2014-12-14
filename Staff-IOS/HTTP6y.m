@@ -98,4 +98,41 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return [self request:@"conveyor/get_list"];
 }
 
++ (NSDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id {
+    NSMutableDictionary* parameters = [NSMutableDictionary new];
+    [parameters setObject:[good_id stringValue] forKey:@"good_id"];
+    [parameters setObject:[store_id stringValue] forKey:@"store_id"];
+    return [self request:@"good/inspect" parameters:parameters];
+}
+
++ (NSDictionary*)goodWarehouse:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
+    NSMutableDictionary* parameters = [NSMutableDictionary new];
+    [parameters setObject:good_id forKey:@"good_id"];
+    [parameters setObject:location_id forKey:@"location_id"];
+    [parameters setObject:location_type forKey:@"location_type"];
+    return [self request:@"good/warehouse" parameters:parameters];
+}
+
++ (NSDictionary*)goodLeave:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
+    NSMutableDictionary* parameters = [NSMutableDictionary new];
+    [parameters setObject:good_id forKey:@"good_id"];
+    [parameters setObject:location_id forKey:@"location_id"];
+    [parameters setObject:location_type forKey:@"location_type"];
+    return [self request:@"good/leave" parameters:parameters];
+}
+
++ (NSDictionary*)goodLoad:(NSNumber*)good_id car_id:(NSNumber*)car_id {
+    NSMutableDictionary* parameters = [NSMutableDictionary new];
+    [parameters setObject:good_id forKey:@"good_id"];
+    [parameters setObject:car_id forKey:@"car_id"];
+    return [self request:@"good/load" parameters:parameters];
+}
+
++ (NSDictionary*)goodUnload:(NSNumber*)good_id password:(NSNumber*)car_id {
+    NSMutableDictionary* parameters = [NSMutableDictionary new];
+    [parameters setObject:good_id forKey:@"good_id"];
+    [parameters setObject:car_id forKey:@"car_id"];
+    return [self request:@"good/unload" parameters:parameters];
+}
+
 @end

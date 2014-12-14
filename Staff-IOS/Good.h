@@ -10,10 +10,10 @@
 
 @interface Good : NSObject
 
-@property (nonatomic) int goodID;
-@property (nonatomic) int orderID;
+@property (nonatomic) NSNumber* goodID;
+@property (nonatomic) NSNumber* orderID;
 @property (nonatomic) NSString* rfid;
-@property (nonatomic) double weigth;
+@property (nonatomic) NSNumber* weigth;
 @property (nonatomic) bool fragile;
 @property (nonatomic) bool flammable;
 @property (nonatomic) NSString* location;

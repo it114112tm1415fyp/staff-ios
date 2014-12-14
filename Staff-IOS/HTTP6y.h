@@ -16,4 +16,9 @@
 + (NSDictionary*)staffLoginWithUsername:(NSString*)username password:(NSString*)password;
 + (NSDictionary*)conveyorGetList;
 
++ (NSDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id ;
++ (NSDictionary*)goodWarehouse:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
++ (NSDictionary*)goodLeave:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
++ (NSDictionary*)goodLoad:(NSNumber*)good_id car_id:(NSNumber*)car_id;
++ (NSDictionary*)goodUnload:(NSNumber*)good_id password:(NSNumber*)car_id;
 @end
