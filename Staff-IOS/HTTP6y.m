@@ -93,19 +93,19 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return [self request:@"conveyor/get_list"];
 }
 
-+ (NSDictionary *)sendMessageWithConvoyerName:(NSString *)convoyer_name message:(NSString *)message
++ (NSDictionary *)sendMessageWithConvoyerName:(NSString *)conveyor_name message:(NSString *)message
 {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:convoyer_name forKey:@"convoyer_name"];
+    [parameters setObject:conveyor_name forKey:@"conveyor_name"];
     [parameters setObject:message forKey:@"message"];
-    return [self request:@"convoyer/send_message" parameters:parameters];
+    return [self request:@"conveyor/send_message" parameters:parameters];
 }
 
-+(NSDictionary *)getControlWithBelt:(NSString *)convoyer_name
++(NSDictionary *)getControlWithBelt:(NSString *)conveyor_name
 {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:convoyer_name forKey:@"convoyer_name"];
-    return [self request:@"convoyer/send_message" parameters:parameters];
+    [parameters setObject:conveyor_name forKey:@"conveyor_name"];
+    return [self request:@"conveyor/get_control" parameters:parameters];
 }
 
 @end
