@@ -5,8 +5,10 @@
 //  Created by tlsv6y on 9/12/14.
 //  Copyright (c) 2014 it114112tm1415fyp. All rights reserved.
 //
+
 #import <UIKit/UIKit.h>
 #import <CommonCrypto/CommonDigest.h>
+#import "AppDelegate.h"
 #import "StaffData.h"
 #import "HTTP6y.h"
 
@@ -15,15 +17,15 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
 
 @implementation HTTP6y
 
-+ (NSDictionary*)request:(NSString*)postposition {
++ (NSMutableDictionary*)request:(NSString*)postposition {
     return [self request:postposition parameters:[NSMutableDictionary new] customParameters:@""];
 }
 
-+ (NSDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters {
++ (NSMutableDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters {
     return [self request:postposition parameters:parameters customParameters:@""];
 }
 
-+ (NSDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters customParameters:(NSString*)customParameters {
++ (NSMutableDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters customParameters:(NSString*)customParameters {
     NSError* error = nil;
     NSString* formatedParameters = @"";
     if(parameters != nil && parameters.count != 0) {
@@ -48,7 +50,7 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     NSURLResponse* response = nil;
     NSData* body = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     if([body length] > 0 && error == nil) {
-        NSMutableDictionary* jsonObject = [NSJSONSerialization JSONObjectWithData:body options:NSJSONReadingAllowFragments error:&error];
+        NSMutableDictionary* jsonObject = [[NSMutableDictionary alloc] initWithDictionary:[NSJSONSerialization JSONObjectWithData:body options:NSJSONReadingAllowFragments error:&error]];
         if(error == nil) {
             if (![self checkResult:jsonObject]) {
                 return [self request:postposition parameters:parameters customParameters:customParameters];
@@ -62,18 +64,17 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return nil;
 }
 
-+ (BOOL)checkResult:(NSDictionary*)result {
-    if([[result objectForKey:@"success"]  isEqual: @(NO)]) {
++ (BOOL)checkResult:(NSMutableDictionary*)result {
+    if([[result objectForKey:@"success"] isEqual: @(NO)]) {
+        [result setObject:@(NO) forKey:@"error_handled"];
         NSString* error = [result objectForKey:@"error"];
         if ([error isEqual:@"Connection expired"]) {
+            [result setObject:@(YES) forKey:@"error_handled"];
             [self staffLoginWithUsername:[StaffData getUsername] password:[StaffData getPassword]];
             return false;
-        } else if ([error isEqual:@"Need login"]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Need Login" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
-        } else if ([error isEqual:@"Unknown"]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unknown" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+        } else if ([error isEqual:@"Need login"] || [error isEqual:@"Unknown"]) {
+            [result setObject:@(YES) forKey:@"error_handled"];
+            NSLog(@"Error: %@",error);
         }
     }
     return true;
@@ -90,25 +91,25 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return output;
 }
 
-+ (NSDictionary*)staffLoginWithUsername:(NSString*)username password:(NSString*)password {
++ (NSMutableDictionary*)staffLoginWithUsername:(NSString*)username password:(NSString*)password {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:username forKey:@"username"];
     [parameters setObject:[self md5:[self md5:password]] forKey:@"password"];
     return [self request:@"account/staff_login" parameters:parameters];
 }
 
-+ (NSDictionary*)conveyorGetList {
++ (NSMutableDictionary*)conveyorGetList {
     return [self request:@"conveyor/get_list"];
 }
 
 
-+ (NSDictionary*)conveyorGetControlWithConveyorId:(NSNumber*)conveyor_id {
++ (NSMutableDictionary*)conveyorGetControlWithConveyorId:(NSNumber*)conveyor_id {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:[conveyor_id stringValue] forKey:@"conveyor_id"];
     return [self request:@"conveyor/get_control" parameters:parameters];
 }
 
-+ (NSDictionary*)conveyorSendMessageWithConveyorId:(NSNumber*)conveyor_id message:(NSString*)message {
++ (NSMutableDictionary*)conveyorSendMessageWithConveyorId:(NSNumber*)conveyor_id message:(NSString*)message {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:[conveyor_id stringValue] forKey:@"conveyor_id"];
     [parameters setObject:message forKey:@"message"];
@@ -116,14 +117,14 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
 
 }
 
-+ (NSDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id {
++ (NSMutableDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:[good_id stringValue] forKey:@"good_id"];
     [parameters setObject:[store_id stringValue] forKey:@"store_id"];
     return [self request:@"good/inspect" parameters:parameters];
 }
 
-+ (NSDictionary*)goodWarehouse:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
++ (NSMutableDictionary*)goodWarehouse:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:good_id forKey:@"good_id"];
     [parameters setObject:location_id forKey:@"location_id"];
@@ -131,7 +132,7 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return [self request:@"good/warehouse" parameters:parameters];
 }
 
-+ (NSDictionary*)goodLeave:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
++ (NSMutableDictionary*)goodLeave:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:good_id forKey:@"good_id"];
     [parameters setObject:location_id forKey:@"location_id"];
@@ -139,14 +140,14 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return [self request:@"good/leave" parameters:parameters];
 }
 
-+ (NSDictionary*)goodLoad:(NSNumber*)good_id car_id:(NSNumber*)car_id {
++ (NSMutableDictionary*)goodLoad:(NSNumber*)good_id car_id:(NSNumber*)car_id {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:good_id forKey:@"good_id"];
     [parameters setObject:car_id forKey:@"car_id"];
     return [self request:@"good/load" parameters:parameters];
 }
 
-+ (NSDictionary*)goodUnload:(NSNumber*)good_id password:(NSNumber*)car_id {
++ (NSMutableDictionary*)goodUnload:(NSNumber*)good_id password:(NSNumber*)car_id {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:good_id forKey:@"good_id"];
     [parameters setObject:car_id forKey:@"car_id"];

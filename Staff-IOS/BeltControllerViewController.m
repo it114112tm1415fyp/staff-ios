@@ -106,6 +106,10 @@
             for (int i = 0; i < [st count]; i++){
                 [self setStopperState:i state:(int)[[st objectAtIndex:i] integerValue]];
             }
+        } else if ([[result objectForKey:@"error_handled"] isEqual:@(NO)]){
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[result objectForKey:@"error"] preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:true completion:nil];
         }
     });
 }

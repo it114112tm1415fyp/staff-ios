@@ -10,17 +10,17 @@
 
 @interface HTTP6y : NSObject
 
-+ (NSDictionary*)request:(NSString*)postposition;
-+ (NSDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters;
-+ (NSDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters customParameters:(NSString*)customParameters;
-+ (NSDictionary*)staffLoginWithUsername:(NSString*)username password:(NSString*)password;
-+ (NSDictionary*)conveyorGetList;
-+ (NSDictionary*)conveyorGetControlWithConveyorId:(NSNumber *)conveyor_id;
-+ (NSDictionary*)conveyorSendMessageWithConveyorId:(NSNumber *)conveyor_id message:(NSString *)message;
++ (NSMutableDictionary*)request:(NSString*)postposition;
++ (NSMutableDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters;
++ (NSMutableDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters customParameters:(NSString*)customParameters;
++ (NSMutableDictionary*)staffLoginWithUsername:(NSString*)username password:(NSString*)password;
++ (NSMutableDictionary*)conveyorGetList;
++ (NSMutableDictionary*)conveyorGetControlWithConveyorId:(NSNumber *)conveyor_id;
++ (NSMutableDictionary*)conveyorSendMessageWithConveyorId:(NSNumber *)conveyor_id message:(NSString *)message;
 
-+ (NSDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id ;
-+ (NSDictionary*)goodWarehouse:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
-+ (NSDictionary*)goodLeave:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
-+ (NSDictionary*)goodLoad:(NSNumber*)good_id car_id:(NSNumber*)car_id;
-+ (NSDictionary*)goodUnload:(NSNumber*)good_id password:(NSNumber*)car_id;
++ (NSMutableDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id ;
++ (NSMutableDictionary*)goodWarehouse:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
++ (NSMutableDictionary*)goodLeave:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
++ (NSMutableDictionary*)goodLoad:(NSNumber*)good_id car_id:(NSNumber*)car_id;
++ (NSMutableDictionary*)goodUnload:(NSNumber*)good_id password:(NSNumber*)car_id;
 @end
