@@ -12,33 +12,22 @@
 @interface BeltControllerViewController : UIViewController{
     AppDelegate *delegate;
 }
-@property (weak, nonatomic) IBOutlet UIButton *mrForwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *mrBackwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *mrStopButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *lcrForwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *lcrBackwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *lcrStopButton;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *stopperAllButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *rcrForwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *rcrBackwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *rcrStopButton;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ch1AllButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *cd1ForwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *cd1BackwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *cd1StopButton;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ch2AllButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *cd2ForwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *cd2BackwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *cd2StopButton;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ch3AllButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *cd3ForwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *cd3BackwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *cd3StopButton;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ch4AllButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *cd4ForwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *cd4BackwardButton;
-@property (weak, nonatomic) IBOutlet UIButton *cd4StopButton;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *lcrAllButton;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *rcrAllButton;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *mrAllButton;
 
 @property (strong, nonatomic) NSString *beltName;
 

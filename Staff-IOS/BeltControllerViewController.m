@@ -7,27 +7,37 @@
 //
 
 #import "BeltControllerViewController.h"
-
-@interface BeltControllerViewController (){
-    NSMutableArray* Array;
-    NSMutableArray* mrImageArray;
-    NSMutableArray* rImageArray;
-    int stopperState[8];
-    int rollerState[7][4];
+#import "HTTP6y.h"
+@interface BeltControllerViewController ()
+{
+    NSTimer* timer;
+    
+    NSArray* mrImageArray;
+    NSArray* crImageArray;
+    NSArray* mrDisImageArray;
+    NSArray* crDisImageArray;
+    NSArray* stImageArray;
+    
+    NSArray* chAllButton;
+    NSArray* crAllButton;
 }
 @end
-
 @implementation BeltControllerViewController
-
+@synthesize stopperAllButton, ch1AllButton, ch2AllButton, ch3AllButton, ch4AllButton, lcrAllButton, rcrAllButton, mrAllButton;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"%@", _beltName);
-    
-    Array =[[NSMutableArray alloc] initWithObjects:[[NSMutableArray alloc]initWithObjects:_mrStopButton,_mrForwardButton,_mrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_lcrStopButton,_lcrForwardButton,_lcrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_rcrStopButton,_rcrForwardButton,_rcrBackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd1StopButton,_cd1ForwardButton,_cd1BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd2StopButton,_cd2ForwardButton,_cd2BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd3StopButton,_cd3ForwardButton,_cd3BackwardButton, nil],[[NSMutableArray alloc]initWithObjects:_cd4StopButton,_cd4ForwardButton,_cd4BackwardButton, nil], nil];
 
-    mrImageArray = [[NSMutableArray alloc] initWithObjects:@"stop_icon_dis",@"cycle_forward_dis",@"cycle_backward_dis",@"stop_icon",@"cycle_forward",@"cycle_backward", nil];
-    rImageArray = [[NSMutableArray alloc] initWithObjects:@"stop_icon_dis",@"forward_icon_dis",@"backward_icon_dis",@"stop_icon",@"forward_icon",@"backward_icon", nil];
+    chAllButton = [[NSMutableArray alloc] initWithArray:@[ch1AllButton, ch2AllButton, ch3AllButton, ch4AllButton]];
+    
+    crAllButton = [[NSMutableArray alloc] initWithArray:@[lcrAllButton, rcrAllButton]];
+
+    mrImageArray = [[NSMutableArray alloc] initWithArray:@[@"stop_icon",@"cycle_forward", @"cycle_backward"]];
+    mrDisImageArray = [[NSMutableArray alloc] initWithArray:@[@"stop_icon_dis",@"cycle_forward_dis", @"cycle_backward_dis"]];
+
+    crImageArray = [[NSMutableArray alloc] initWithArray:@[@"stop_icon",@"forward_icon",@"backward_icon", @"up_icon"]];
+    crDisImageArray = [[NSMutableArray alloc] initWithArray:@[@"stop_icon_dis",@"forward_icon_dis",@"backward_icon_dis", @"up_icon_dis"]];
+    
+    stImageArray = [[NSMutableArray alloc] initWithArray:@[@"up_icon_dis", @"up_icon"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,66 +46,84 @@
 }
 
 - (IBAction)upButtonOnClick:(UIButton *)sender {
-    int rollerType = (int) sender.tag / 10 - 1;
-    int buttonType = (int) sender.tag % 10 - 4;
-    NSLog(@"%@", [sender restorationIdentifier]);
-    NSLog(@"Roller Type = %D Button Type = %d", rollerType, buttonType);
-    if (rollerType > 2){
-        switch (rollerState[rollerType][buttonType]) {
-            case 0:
-                NSLog(@"Roller Type = %d UP%d is ON", rollerType, buttonType);
-                rollerState[rollerType][buttonType] = 1;
-                [sender setImage:[UIImage imageNamed:@"up_icon"] forState:UIControlStateNormal];
-                break;
-            case 1:
-                NSLog(@"Roller Type = %d UP%d is OFF", rollerType, buttonType);
-                rollerState[rollerType][buttonType] = 0;
-                [sender setImage:[UIImage imageNamed:@"up_icon_dis"] forState:UIControlStateNormal];
-                break;
-            default:
-                break;
-            }
-        }else{
-            switch (stopperState[sender.tag - 1]) {
-                case 0:
-                    NSLog(@"Stopper %lD is ON", (long)sender.tag);
-                    stopperState[sender.tag - 1] = 1;
-                    [sender setImage:[UIImage imageNamed:@"up_icon"] forState:UIControlStateNormal];
-                    break;
-                case 1:
-                    NSLog(@"Stopper %lD is OFF", (long)sender.tag);
-                    stopperState[sender.tag - 1] = 0;
-                    [sender setImage:[UIImage imageNamed:@"up_icon_dis"] forState:UIControlStateNormal];
-                    break;
-                default:
-                    break;
+    [self sendMessage:sender];
+}
+
+- (IBAction)rollerButtonOnClick:(UIButton *)sender {
+    [self sendMessage:sender];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getControl];
+    timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(getControl) userInfo:nil repeats:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [timer invalidate];
+}
+
+-(void) sendMessage:(UIButton *)sender
+{
+    NSDictionary* result = [HTTP6y sendMessageWithConvoyerName:@"Conveyor for test" message:[sender restorationIdentifier]];
+    [self updateImage:result];
+}
+
+- (void) getControl {
+    NSDictionary *result = [HTTP6y getControlWithBelt:@"Conveyor for test"];
+    [self updateImage:result];
+}
+
+-(void) updateImage:(NSDictionary *)result
+{
+    if ([[result objectForKey:@"success"] isEqual:@(YES)]) {
+        NSDictionary *message = [result objectForKey:@"message"];
+        NSArray *ch = [message objectForKey:@"ch"];
+        for (int i = 0; i < [ch count]; i++){
+            [self setCHButtonState:i state:(int)[[ch objectAtIndex:i]integerValue]];
+        }
+        NSArray *cr = [message objectForKey:@"cr"];
+        for (int i = 0; i < [cr count]; i++){
+            [self setCRButtonState:i state:(int)[[cr objectAtIndex:i] integerValue]];
+        }
+        [self setMRButtonState:[[message objectForKey:@"mr"] intValue]];
+        NSArray *st = [message objectForKey:@"st"];
+        for (int i = 0; i < [st count]; i++){
+            [self setStopperState:i state:(int)[[st objectAtIndex:i] integerValue]];
         }
     }
 }
 
-- (IBAction)rollerButtonOnClick:(UIButton *)sender {
-    int rollerType = (int) sender.tag / 10 - 1;
-    int buttonType = (int) sender.tag % 10 - 1;
-    
-    NSMutableArray *ImageArray;
-    if (rollerType == 0)
-        ImageArray = mrImageArray;
-    else
-        ImageArray = rImageArray;
-    
-    for (int i = 0; i < 3; i++) {
-        rollerState[rollerType][i] = 0;
-        [Array[rollerType][i] setImage:[UIImage imageNamed:ImageArray[i]] forState:UIControlStateNormal];
+- (void) setMRButtonState:(int)state
+{
+    for (int i = 0; i < [mrAllButton count]; i++) {
+        [[mrAllButton objectAtIndex:i] setImage:[UIImage imageNamed:[mrDisImageArray objectAtIndex:i]] forState:UIControlStateNormal];
     }
+    [[mrAllButton objectAtIndex:state] setImage:[UIImage imageNamed:[mrImageArray objectAtIndex:state]] forState:UIControlStateNormal];
+}
+- (void) setCHButtonState:(int)changeover state:(int)state
+{
+    for (int i = 0; i < [[chAllButton objectAtIndex:changeover] count]; i++) {
+        [[[chAllButton objectAtIndex:changeover] objectAtIndex:i] setImage:[UIImage imageNamed:[crDisImageArray objectAtIndex:i]] forState:UIControlStateNormal];
+    }
+    [[[chAllButton objectAtIndex:changeover] objectAtIndex:state / 2] setImage:[UIImage imageNamed:[crImageArray objectAtIndex:state / 2]] forState:UIControlStateNormal];
     
-    rollerState[rollerType][buttonType] = 1;
-    for (int i = 0; i < 3; i++)
+    [[[chAllButton objectAtIndex:changeover] objectAtIndex:3] setImage:[UIImage imageNamed:[stImageArray objectAtIndex:state % 2]] forState:UIControlStateNormal];
+}
+
+-(void) setCRButtonState:(int)crossover state:(int)state
+{
+    for (int i = 0; i < [[crAllButton objectAtIndex:crossover] count]; i++)
     {
-        if (rollerState[rollerType][i] == 1) {
-            [Array[rollerType][buttonType] setImage:[UIImage imageNamed:ImageArray[i + 3]] forState:UIControlStateNormal];
-            NSLog(@"Roller Type = %D Button Type = %d is ON", rollerType, buttonType);
-            break;
-        }
+        [[[crAllButton objectAtIndex:crossover] objectAtIndex:i] setImage:[UIImage imageNamed:[crDisImageArray objectAtIndex:i]] forState:UIControlStateNormal];
     }
+    [[[crAllButton objectAtIndex:crossover] objectAtIndex:state] setImage:[UIImage imageNamed:[crImageArray objectAtIndex:state]] forState:UIControlStateNormal];
+}
+
+- (void) setStopperState:(int)stopper state:(int)state
+{
+    [[stopperAllButton objectAtIndex:stopper] setImage:[UIImage imageNamed:[stImageArray objectAtIndex:state]] forState:UIControlStateNormal];
 }
 @end
