@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED3A0C291A39A85B00115076 /* ChooseActionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3A0C281A39A85B00115076 /* ChooseActionTableViewController.m */; };
 		ED9E5E9B1A38130800350588 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5E9A1A38130800350588 /* main.m */; };
 		ED9E5E9E1A38130800350588 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5E9D1A38130800350588 /* AppDelegate.m */; };
 		ED9E5EA11A38130800350588 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5EA01A38130800350588 /* LoginViewController.m */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED3A0C271A39A85B00115076 /* ChooseActionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseActionTableViewController.h; sourceTree = "<group>"; };
+		ED3A0C281A39A85B00115076 /* ChooseActionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseActionTableViewController.m; sourceTree = "<group>"; };
 		ED9E5E951A38130800350588 /* Staff-IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Staff-IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED9E5E991A38130800350588 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED9E5E9A1A38130800350588 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -120,6 +123,8 @@
 				ED9E5E9F1A38130800350588 /* LoginViewController.h */,
 				ED9E5EA01A38130800350588 /* LoginViewController.m */,
 				ED9E5EA21A38130800350588 /* Main.storyboard */,
+				ED3A0C271A39A85B00115076 /* ChooseActionTableViewController.h */,
+				ED3A0C281A39A85B00115076 /* ChooseActionTableViewController.m */,
 				ED9E5EC41A3813D900350588 /* MenuViewController.h */,
 				ED9E5EC51A3813D900350588 /* MenuViewController.m */,
 				ED9E5EC61A3813D900350588 /* QRCodeScannerViewController.h */,
@@ -279,6 +284,7 @@
 				ED9E5EC91A3813D900350588 /* Good.m in Sources */,
 				ED9E5ED51A3844A800350588 /* StaffDetailViewController.m in Sources */,
 				ED9E5EA11A38130800350588 /* LoginViewController.m in Sources */,
+				ED3A0C291A39A85B00115076 /* ChooseActionTableViewController.m in Sources */,
 				ED9E5E9E1A38130800350588 /* AppDelegate.m in Sources */,
 				ED9E5ED81A3866B600350588 /* ChooseBeltControllerTableViewController.m in Sources */,
 				ED9E5E9B1A38130800350588 /* main.m in Sources */,
@@ -414,6 +420,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = "Staff-IOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -425,6 +432,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = "Staff-IOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -434,6 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -453,6 +462,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
