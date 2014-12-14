@@ -11,6 +11,8 @@
 @interface ChooseActionTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSString *selectedAction;
-@property (strong, nonatomic) NSString *selectedStakeholder;
+@property (strong, nonatomic) NSString *selectedLocation;
+@property (nonatomic) int selectedActionType;
+@property (nonatomic) int selectedLocationType;
 
 @end

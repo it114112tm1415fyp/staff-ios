@@ -10,7 +10,9 @@
 #import "Good.h"
 #import "HTTP6y.h"
 
-@interface QRCodeScannerViewController ()
+@interface QRCodeScannerViewController (){
+    Good* good;
+}
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @property (nonatomic) BOOL isReading;
@@ -22,9 +24,7 @@
 @end
 
 @implementation QRCodeScannerViewController
-
 @synthesize listOfID;
-Good* good;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,7 +42,7 @@ Good* good;
     [self willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
     [self startReading];
     NSLog(@"%@",_chooseActionController.selectedAction);
-    NSLog(@"%@",_chooseActionController.selectedStakeholder);
+    NSLog(@"%@",_chooseActionController.selectedLocation);
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -143,14 +143,14 @@ Good* good;
                 NSNumber *order_id = [qrCodeResult objectForKey:@"order_id"];
                 NSString *rfid_tag = [qrCodeResult objectForKey:@"rfid_tag"];
                 NSNumber *weight =[qrCodeResult objectForKey:@"weight"];
-                bool *fragile = (bool)[qrCodeResult objectForKey:@"fragile"];
-                bool *flammable = (bool)[qrCodeResult objectForKey:@"flammable"];
+                _Bool fragile = [qrCodeResult objectForKey:@"fragile"];
+                _Bool flammable = [qrCodeResult objectForKey:@"flammable"];
                 NSString *created_at = [qrCodeResult objectForKey:@"created_at"];
                 NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
                 [dateFormat setDateFormat:@"EE, d LLLL yyyy HH:mm:ss Z"];
                 NSDate *date = [dateFormat dateFromString:created_at];
                 
-                Good* good = [[Good alloc] init];
+                good = [Good new];
                 good.goodID = good_id;
                 good.orderID = order_id;
                 good.rfid = rfid_tag;
@@ -161,54 +161,37 @@ Good* good;
                 
                 [_goodDictionary setObject:good forKey:qrCodeString];
                 
-//                [[[NSThread alloc] initWithTarget:self selector:@selector(getControlThreadMain) object:nil] start];
-
-                NSDictionary* result = [HTTP6y goodInspect:good_id store_id:[NSNumber numberWithInt:1]];
-                if (result != nil) {
-                    NSLog(@"success : %@",[result objectForKey:@"success"]);
-                    if ([[result objectForKey:@"success"] isEqual: @(YES)]) {
-                        NSLog(@"%@", [result objectForKey:@"update_time"]);
-                        good.updatedTime = [result objectForKey:@"update_time"];
-                    } else {
-                        [[[UIAlertView alloc] initWithTitle:@"Error!"
-                                                    message:@"Fail to connect server.\n Please try again later."
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil, nil] show];
-                        [self stopReading];
-                    }
-                } else {
-                    [[[UIAlertView alloc] initWithTitle:@"Error!"
-                                                message:@"Fail to connect server.\n Please try again later."
-                                               delegate:self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil, nil] show];
-                    [self stopReading];
-                }
+                [[[NSThread alloc] initWithTarget:self selector:@selector(goodActionThreadMain) object:nil] start];
                 
                 NSString *stringFromScanning = [NSString stringWithFormat:@"Item Counting : %lu QRCode : %@", (unsigned long)[_goodDictionary count] + 1, good_id];
                 [_scannerState performSelectorOnMainThread:@selector(setText:) withObject:stringFromScanning waitUntilDone:NO];
-                
                 [self performSelectorOnMainThread:@selector(setGoodInformation:) withObject:qrCodeString waitUntilDone:NO];
             }
-            
         }
     }
 }
 
-//- (void) goodActionThreadMain {
-//    NSDictionary *result = [HTTP6y conveyorGetList];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        if ([[result objectForKey:@"success"] isEqual:@(YES)]) {
-//
-//        } else if ([[result objectForKey:@"error_handled"] isEqual:@(NO)]){
-//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[result objectForKey:@"error"] preferredStyle:UIAlertControllerStyleAlert];
-//            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
-//            [self presentViewController:alert animated:true completion:nil];
-//        }
-//        [self.tableView reloadData];
-//    });
-//}
+- (void) goodActionThreadMain {
+    NSDictionary *result;
+    switch (_chooseActionController.selectedActionType) {
+        case 0:
+            result = [HTTP6y goodInspect:good.goodID store_id:[NSNumber numberWithInt:_chooseActionController.selectedLocationType]];
+            break;
+        default:
+            break;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[result objectForKey:@"success"] isEqual:@(YES)]) {
+            NSLog(@"%@", [result objectForKey:@"update_time"]);
+            good.updatedTime = [result objectForKey:@"update_time"];
+        } else if ([[result objectForKey:@"error_handled"] isEqual:@(NO)]){
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[result objectForKey:@"error"] preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:true completion:nil];
+            [self stopReading];
+        }
+    });
+}
 
 -(void)setGoodInformation:(NSString *)goodsKey{
     _idLabel.text = [NSString stringWithFormat:@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).goodID];

@@ -66,6 +66,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     selectionIndex = selectionIndex == indexPath.row ? NSIntegerMax : indexPath.row - ( indexPath.row > selectionIndex ? [self submenu].count : 0 );
     _selectedAction = selectionIndex == NSIntegerMax ? nil : [action objectAtIndex:selectionIndex];
+    _selectedActionType = selectionIndex;
+    _selectedLocationType = indexPath.row - ( indexPath.row > selectionIndex ? [self submenu].count : 0 );
     [self.tableView reloadData];
 }
 
@@ -73,9 +75,8 @@
     QRCodeScannerViewController* controller = [segue destinationViewController];
     UITableViewCell *cell = sender;
     controller.chooseActionController = self;
-    _selectedStakeholder = cell.textLabel.text;
+    _selectedLocation = cell.textLabel.text;
 }
-
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
