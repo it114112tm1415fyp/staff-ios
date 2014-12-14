@@ -161,6 +161,8 @@ Good* good;
                 
                 [_goodDictionary setObject:good forKey:qrCodeString];
                 
+//                [[[NSThread alloc] initWithTarget:self selector:@selector(getControlThreadMain) object:nil] start];
+
                 NSDictionary* result = [HTTP6y goodInspect:good_id store_id:[NSNumber numberWithInt:1]];
                 if (result != nil) {
                     NSLog(@"success : %@",[result objectForKey:@"success"]);
@@ -193,6 +195,20 @@ Good* good;
         }
     }
 }
+
+//- (void) goodActionThreadMain {
+//    NSDictionary *result = [HTTP6y conveyorGetList];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if ([[result objectForKey:@"success"] isEqual:@(YES)]) {
+//
+//        } else if ([[result objectForKey:@"error_handled"] isEqual:@(NO)]){
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[result objectForKey:@"error"] preferredStyle:UIAlertControllerStyleAlert];
+//            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+//            [self presentViewController:alert animated:true completion:nil];
+//        }
+//        [self.tableView reloadData];
+//    });
+//}
 
 -(void)setGoodInformation:(NSString *)goodsKey{
     _idLabel.text = [NSString stringWithFormat:@"%@", ((Good *)[_goodDictionary objectForKey:goodsKey]).goodID];

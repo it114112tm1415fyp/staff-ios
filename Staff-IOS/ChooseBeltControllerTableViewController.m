@@ -26,40 +26,26 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    NSDictionary *result = [HTTP6y conveyorGetList];
-    if (result != nil){
-        NSLog(@"conveyor/get_list : %@",[result objectForKey:@"success"]);
-        if([[result objectForKey:@"success"] isEqual: @(YES)]) {
-            if([result objectForKey:@"list"] != nil){
-                NSMutableArray*list =[[NSMutableArray alloc] initWithArray:[result objectForKey:@"list"]];
-                listOfBelt = [NSMutableArray new];
-                for (int i = 0; i < [result count]; i++) {
-                    [listOfBelt addObject:[list objectAtIndex:i]];
-                }
-            }
-        } else {
-            [[[UIAlertView alloc] initWithTitle:@"Error!"
-                                        message:[result objectForKey:@"error"]
-                                       delegate:self
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil, nil] show];
-        }
-    } else {
-        [[[UIAlertView alloc] initWithTitle:@"Error!"
-                                    message:@"Fail to connect server.\n Please try again later."
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-    }
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    
+    [[[NSThread alloc] initWithTarget:self selector:@selector(getControlThreadMain) object:nil] start];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) getControlBeltListThreadMain {
+    NSDictionary *result = [HTTP6y conveyorGetList];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[result objectForKey:@"success"] isEqual:@(YES)]) {
+            listOfBelt = [[NSMutableArray alloc] initWithArray:[result objectForKey:@"list"]];
+        } else if ([[result objectForKey:@"error_handled"] isEqual:@(NO)]){
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[result objectForKey:@"error"] preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:true completion:nil];
+        }
+        [self.tableView reloadData];
+    });
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
