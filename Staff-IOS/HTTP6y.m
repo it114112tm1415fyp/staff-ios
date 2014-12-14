@@ -62,6 +62,23 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return nil;
 }
 
++ (BOOL)checkResult:(NSDictionary*)result {
+    if([[result objectForKey:@"success"]  isEqual: @(NO)]) {
+        NSString* error = [result objectForKey:@"error"];
+        if ([error isEqual:@"Connection expired"]) {
+            [self staffLoginWithUsername:[StaffData getUsername] password:[StaffData getPassword]];
+            return false;
+        } else if ([error isEqual:@"Need login"]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Need Login" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+        } else if ([error isEqual:@"Unknown"]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unknown" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+        }
+    }
+    return true;
+}
+
 + (NSString*)md5:(NSString*)s {
     const char *cStr = [s UTF8String];
     unsigned char digest[16];
@@ -73,20 +90,6 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return output;
 }
 
-+ (BOOL)checkResult:(NSDictionary*)result {
-    if([[result objectForKey:@"success"]  isEqual: @(NO)]) {
-        NSString* error = [result objectForKey:@"error"];
-        if ([error isEqual:@"Connection expired"]) {
-            [self staffLoginWithUsername:[StaffData getUsername] password:[StaffData getPassword]];
-            return false;
-        } else if ([error isEqual:@"Need login"]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Need Login" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
-        }
-    }
-    return true;
-}
-
 + (NSDictionary*)staffLoginWithUsername:(NSString*)username password:(NSString*)password {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:username forKey:@"username"];
@@ -96,6 +99,21 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
 
 + (NSDictionary*)conveyorGetList {
     return [self request:@"conveyor/get_list"];
+}
+
+
++ (NSDictionary*)conveyorGetControlWithConveyorId:(NSNumber*)conveyor_id {
+    NSMutableDictionary* parameters = [NSMutableDictionary new];
+    [parameters setObject:[conveyor_id stringValue] forKey:@"conveyor_id"];
+    return [self request:@"conveyor/get_control" parameters:parameters];
+}
+
++ (NSDictionary*)conveyorSendMessageWithConveyorId:(NSNumber*)conveyor_id message:(NSString*)message {
+    NSMutableDictionary* parameters = [NSMutableDictionary new];
+    [parameters setObject:[conveyor_id stringValue] forKey:@"conveyor_id"];
+    [parameters setObject:message forKey:@"message"];
+    return [self request:@"conveyor/send_message" parameters:parameters];
+
 }
 
 + (NSDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id {

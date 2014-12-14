@@ -13,7 +13,6 @@
     NSArray *action;
     NSArray *menu;
     NSInteger selectionIndex;
-    NSString *stakeholderType;
 }
 
 @end
@@ -66,7 +65,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     selectionIndex = selectionIndex == indexPath.row ? NSIntegerMax : indexPath.row - ( indexPath.row > selectionIndex ? [self submenu].count : 0 );
-    _selectedAction = [action objectAtIndex:selectionIndex];
+    _selectedAction = selectionIndex == NSIntegerMax ? nil : [action objectAtIndex:selectionIndex];
     [self.tableView reloadData];
 }
 
