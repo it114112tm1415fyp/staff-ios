@@ -18,6 +18,7 @@
 + (NSMutableDictionary*)conveyorGetControlWithConveyorId:(NSNumber *)conveyor_id;
 + (NSMutableDictionary*)conveyorSendMessageWithConveyorId:(NSNumber *)conveyor_id message:(NSString *)message;
 
++ (NSMutableDictionary*)addressGetList;
 + (NSMutableDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id ;
 + (NSMutableDictionary*)goodWarehouse:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
 + (NSMutableDictionary*)goodLeave:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;

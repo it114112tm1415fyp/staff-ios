@@ -117,6 +117,10 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
 
 }
 
++ (NSMutableDictionary*)addressGetList{
+    return [self request:@"address/get_list"];
+}
+
 + (NSMutableDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:[good_id stringValue] forKey:@"good_id"];

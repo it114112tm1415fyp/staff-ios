@@ -8,11 +8,15 @@
 
 #import "ChooseActionTableViewController.h"
 #import "QRCodeScannerViewController.h"
+#import "HTTP6y.h"
 
 @interface ChooseActionTableViewController (){
     NSArray *action;
     NSArray *menu;
     NSInteger selectionIndex;
+    NSArray *car;
+    NSArray *storeAddress;
+    NSArray *shopAddress;
 }
 
 @end
@@ -21,10 +25,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSArray *car = [[NSMutableArray alloc] initWithObjects:@"Car 1",@"Car 2", nil];
-    NSArray *store = [[NSMutableArray alloc] initWithObjects:@"Store 1",@"Store 2", nil];
+    [[[NSThread alloc] initWithTarget:self selector:@selector(conveyorGetListThreadMain) object:nil] start];
     action = @[@"inspect", @"warehouse", @"leave", @"load", @"unload", @"receive", @"issue"];
-    menu = @[store, store, store, car, car, @[], @[]];
+    NSArray *location = [storeAddress arrayByAddingObjectsFromArray:shopAddress];
+    menu = @[storeAddress, location, location, car, car, @[], @[]];
+}
+
+- (void) conveyorGetListThreadMain {
+    NSDictionary *result = [HTTP6y addressGetList];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[result objectForKey:@"success"] isEqual:@(YES)]) {
+            car = [[NSMutableArray alloc] initWithArray:[result objectForKey:@"car"]];
+            storeAddress = [[NSMutableArray alloc] initWithArray:[result objectForKey:@"storeAddress"]];
+            shopAddress = [[NSMutableArray alloc] initWithArray:[result objectForKey:@"shopAddress"]];
+        } else if ([[result objectForKey:@"error_handled"] isEqual:@(NO)]){
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[result objectForKey:@"error"] preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:true completion:nil];
+        }
+        [self.tableView reloadData];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -51,7 +71,7 @@
 {
     if(indexPath.row > selectionIndex && indexPath.row <= selectionIndex + [self submenu].count) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Submenu" forIndexPath:indexPath];
-        cell.textLabel.text = [[self submenu] objectAtIndex:indexPath.row - selectionIndex - 1];
+        cell.textLabel.text = [NSString stringWithFormat:@"\t%@", [((NSDictionary*)[[self submenu] objectAtIndex:indexPath.row - selectionIndex - 1]) objectForKey:@""]];
         return cell;
     } else {
         NSInteger actionIndex = indexPath.row - ( indexPath.row > selectionIndex ? [self submenu].count : 0 );
