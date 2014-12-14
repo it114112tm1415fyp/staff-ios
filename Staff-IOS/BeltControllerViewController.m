@@ -41,6 +41,7 @@
     crDisImageArray = [[NSMutableArray alloc] initWithArray:@[@"stop_icon_dis",@"forward_icon_dis",@"backward_icon_dis", @"up_icon_dis"]];
     
     stImageArray = [[NSMutableArray alloc] initWithArray:@[@"up_icon_dis", @"up_icon"]];
+    self.navigationItem.title = _beltName;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,7 +76,7 @@
 
 -(void) sendMessageThreadMain:(UIButton *)sender
 {
-    NSDictionary* result = [HTTP6y conveyorSendMessageWithConveyorId:@2 message:[sender restorationIdentifier]];
+    NSDictionary* result = [HTTP6y conveyorSendMessageWithConveyorId:_beltId message:[sender restorationIdentifier]];
     [self updateImage:result];
 }
 
@@ -84,7 +85,7 @@
 }
 
 - (void) getControlThreadMain {
-    NSDictionary *result = [HTTP6y conveyorGetControlWithConveyorId:@2];
+    NSDictionary *result = [HTTP6y conveyorGetControlWithConveyorId:_beltId];
     [self updateImage:result];
 }
 

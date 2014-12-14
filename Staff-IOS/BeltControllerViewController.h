@@ -29,6 +29,8 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *mrAllButton;
 
+@property (strong, nonatomic) NSNumber *beltId;
+
 @property (strong, nonatomic) NSString *beltName;
 
 @end
