@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
-@interface BeltControllerViewController : UIViewController
+@interface BeltControllerViewController : UIViewController{
+    AppDelegate *delegate;
+}
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *stopperAllButton;
 
@@ -26,7 +28,6 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *rcrAllButton;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *mrAllButton;
-
 
 @property (strong, nonatomic) NSString *beltName;
 
