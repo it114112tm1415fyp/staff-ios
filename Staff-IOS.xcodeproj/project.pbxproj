@@ -24,6 +24,8 @@
 		ED9E5ED51A3844A800350588 /* StaffDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5ED41A3844A800350588 /* StaffDetailViewController.m */; };
 		ED9E5ED81A3866B600350588 /* ChooseBeltControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E5ED71A3866B600350588 /* ChooseBeltControllerTableViewController.m */; };
 		EDA7DFB71A3DCAAB00112E8E /* ChooseLocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7DFB61A3DCAAB00112E8E /* ChooseLocationTableViewController.m */; };
+		EDA7DFBA1A3EA9B000112E8E /* ChooseGoodsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7DFB91A3EA9B000112E8E /* ChooseGoodsTableViewController.m */; };
+		EDA7DFBD1A3EB1DC00112E8E /* GoodDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7DFBC1A3EB1DC00112E8E /* GoodDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,10 @@
 		ED9E5ED71A3866B600350588 /* ChooseBeltControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseBeltControllerTableViewController.m; sourceTree = "<group>"; };
 		EDA7DFB51A3DCAAB00112E8E /* ChooseLocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseLocationTableViewController.h; sourceTree = "<group>"; };
 		EDA7DFB61A3DCAAB00112E8E /* ChooseLocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseLocationTableViewController.m; sourceTree = "<group>"; };
+		EDA7DFB81A3EA9B000112E8E /* ChooseGoodsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGoodsTableViewController.h; sourceTree = "<group>"; };
+		EDA7DFB91A3EA9B000112E8E /* ChooseGoodsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGoodsTableViewController.m; sourceTree = "<group>"; };
+		EDA7DFBB1A3EB1DC00112E8E /* GoodDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodDetailViewController.h; sourceTree = "<group>"; };
+		EDA7DFBC1A3EB1DC00112E8E /* GoodDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +121,16 @@
 				ED9E5E9D1A38130800350588 /* AppDelegate.m */,
 				ED9E5EBE1A3813D900350588 /* BeltControllerViewController.h */,
 				ED9E5EBF1A3813D900350588 /* BeltControllerViewController.m */,
+				ED3A0C271A39A85B00115076 /* ChooseActionTableViewController.h */,
+				ED3A0C281A39A85B00115076 /* ChooseActionTableViewController.m */,
 				ED9E5ED61A3866B600350588 /* ChooseBeltControllerTableViewController.h */,
 				ED9E5ED71A3866B600350588 /* ChooseBeltControllerTableViewController.m */,
+				EDA7DFB81A3EA9B000112E8E /* ChooseGoodsTableViewController.h */,
+				EDA7DFB91A3EA9B000112E8E /* ChooseGoodsTableViewController.m */,
+				EDA7DFBB1A3EB1DC00112E8E /* GoodDetailViewController.h */,
+				EDA7DFBC1A3EB1DC00112E8E /* GoodDetailViewController.m */,
+				EDA7DFB51A3DCAAB00112E8E /* ChooseLocationTableViewController.h */,
+				EDA7DFB61A3DCAAB00112E8E /* ChooseLocationTableViewController.m */,
 				ED9E5EC01A3813D900350588 /* Good.h */,
 				ED9E5EC11A3813D900350588 /* Good.m */,
 				ED9E5EC21A3813D900350588 /* HTTP6y.h */,
@@ -126,10 +140,6 @@
 				ED9E5E9F1A38130800350588 /* LoginViewController.h */,
 				ED9E5EA01A38130800350588 /* LoginViewController.m */,
 				ED9E5EA21A38130800350588 /* Main.storyboard */,
-				ED3A0C271A39A85B00115076 /* ChooseActionTableViewController.h */,
-				ED3A0C281A39A85B00115076 /* ChooseActionTableViewController.m */,
-				EDA7DFB51A3DCAAB00112E8E /* ChooseLocationTableViewController.h */,
-				EDA7DFB61A3DCAAB00112E8E /* ChooseLocationTableViewController.m */,
 				ED9E5EC41A3813D900350588 /* MenuViewController.h */,
 				ED9E5EC51A3813D900350588 /* MenuViewController.m */,
 				ED9E5EC61A3813D900350588 /* QRCodeScannerViewController.h */,
@@ -288,6 +298,8 @@
 			files = (
 				ED9E5EC91A3813D900350588 /* Good.m in Sources */,
 				ED9E5ED51A3844A800350588 /* StaffDetailViewController.m in Sources */,
+				EDA7DFBA1A3EA9B000112E8E /* ChooseGoodsTableViewController.m in Sources */,
+				EDA7DFBD1A3EB1DC00112E8E /* GoodDetailViewController.m in Sources */,
 				ED9E5EA11A38130800350588 /* LoginViewController.m in Sources */,
 				ED3A0C291A39A85B00115076 /* ChooseActionTableViewController.m in Sources */,
 				ED9E5E9E1A38130800350588 /* AppDelegate.m in Sources */,

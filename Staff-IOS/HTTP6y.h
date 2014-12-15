@@ -26,4 +26,6 @@
 + (NSMutableDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id;
 + (NSMutableDictionary*)goodWarehouseLeave:(NSString*)actionType good_id:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
 + (NSMutableDictionary*)goodLoadUnload:(NSString*)actionType good_id:(NSNumber*)good_id car_id:(NSNumber*)car_id;
+
++ (NSMutableDictionary*)goodGetList;
 @end

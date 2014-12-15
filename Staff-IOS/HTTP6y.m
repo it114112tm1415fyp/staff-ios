@@ -49,6 +49,7 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     [request setHTTPBody:data];
     NSURLResponse* response = nil;
     NSData* body = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSLog(@"Result: %@", [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding]);
     if([body length] > 0 && error == nil) {
         NSMutableDictionary* jsonObject = [[NSMutableDictionary alloc] initWithDictionary:[NSJSONSerialization JSONObjectWithData:body options:NSJSONReadingAllowFragments error:&error]];
         if(error == nil) {
@@ -122,6 +123,7 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
 }
 
 + (NSMutableDictionary*)goodAction:(NSString*)actionName good_id:(NSNumber*)good_id location_id:(NSNumber*)location_id locationType:(NSString*)locationType {
+    NSLog(@"actionName : %@", actionName);
     if ([actionName isEqual:@"inspect"]) {
         return [self goodInspect:good_id store_id:location_id];
     } else if ([actionName isEqual:@"warehouse"] || [actionName isEqual:@"leave"]){
@@ -141,17 +143,21 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
 
 + (NSMutableDictionary*)goodWarehouseLeave:(NSString*)actionType good_id:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
     NSMutableDictionary* parameters = [NSMutableDictionary new];
-    [parameters setObject:good_id forKey:@"good_id"];
-    [parameters setObject:location_id forKey:@"location_id"];
+    [parameters setObject:[good_id stringValue] forKey:@"good_id"];
+    [parameters setObject:[location_id stringValue] forKey:@"location_id"];
     [parameters setObject:location_type forKey:@"location_type"];
     return [self request:[@"good/" stringByAppendingString:actionType] parameters:parameters];
 }
 
 + (NSMutableDictionary*)goodLoadUnload:(NSString*)actionType good_id:(NSNumber*)good_id car_id:(NSNumber*)car_id {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
-    [parameters setObject:good_id forKey:@"good_id"];
-    [parameters setObject:car_id forKey:@"car_id"];
+    [parameters setObject:[good_id stringValue] forKey:@"good_id"];
+    [parameters setObject:[car_id stringValue] forKey:@"car_id"];
     return [self request:[@"good/" stringByAppendingString:actionType] parameters:parameters];
+}
+
++ (NSMutableDictionary*)goodGetList{
+    return [self request:@"good/get_list"];
 }
 
 @end

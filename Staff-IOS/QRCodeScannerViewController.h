@@ -22,13 +22,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *weigthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fragileLabel;
 @property (weak, nonatomic) IBOutlet UILabel *flammableLabel;
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *destinationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *departureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *createdTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *updatedTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *stateLabel;
 
 @property (nonatomic, strong) NSMutableArray *listOfID;
-@property (nonatomic, strong) NSMutableDictionary *goodDictionary;
 
 @property (nonatomic, strong) NSString *actionName;
 @property (nonatomic, strong) NSNumber *locationID;

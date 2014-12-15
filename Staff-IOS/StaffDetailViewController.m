@@ -19,8 +19,14 @@
     // Do any additional setup after loading the view.
     _staffIdLabel.text = [NSString stringWithFormat:@"%d", [StaffData getStaffId]];
     _staffNameLabel.text = [StaffData getStaffName];
-    _entryTimeLabel.text = [StaffData getRegisterDate];
-    _lastActivityTimeLabel.text = [StaffData getLastModifyTime];
+    NSDateFormatter *getDateFormat = [[NSDateFormatter alloc] init];
+    [getDateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.'000Z'"];
+    NSDateFormatter *setDateFormat = [[NSDateFormatter alloc] init];
+    [setDateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *date = [setDateFormat stringFromDate:[getDateFormat dateFromString:[StaffData getRegisterDate]]];
+    _entryTimeLabel.text = date;
+    date = [setDateFormat stringFromDate:[getDateFormat dateFromString:[StaffData getLastModifyTime]]];
+    _lastActivityTimeLabel.text = date;
 }
 
 - (void)didReceiveMemoryWarning {

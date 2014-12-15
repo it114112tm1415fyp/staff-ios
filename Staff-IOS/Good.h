@@ -14,10 +14,14 @@
 @property (nonatomic) NSNumber* orderID;
 @property (nonatomic) NSString* rfid;
 @property (nonatomic) NSNumber* weigth;
-@property (nonatomic) bool fragile;
-@property (nonatomic) bool flammable;
-@property (nonatomic) NSString* location;
+@property (nonatomic) NSString* fragile;
+@property (nonatomic) NSString* flammable;
+@property (nonatomic) NSString* destination;
+@property (nonatomic) NSString* departure;
 @property (nonatomic) NSDate* createdTime;
 @property (nonatomic) NSDate* updatedTime;
+@property (nonatomic) NSString* location;
+@property (nonatomic) NSString* locationType;
+@property (nonatomic) NSString*lastAction;
 
 @end

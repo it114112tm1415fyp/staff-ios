@@ -45,7 +45,6 @@
             [StaffData setLastModifyTime:[result objectForKey:@"last_modify_time"]];
             [StaffData setUsername:_usernameTextField.text];
             [StaffData setPassword:_passwordTextField.text];
-            
             MenuViewController *menuView = (MenuViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MenuView"];
             [self presentViewController:menuView animated:true completion:nil];
         } else if ([[result objectForKey:@"error_handled"] isEqual:@(NO)]){

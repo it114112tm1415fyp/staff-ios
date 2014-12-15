@@ -50,11 +50,6 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     UITableViewCell *cell = sender;
     NSMutableDictionary *result = [HTTP6y conveyorGetControlWithConveyorId:[[NSNumber alloc] initWithInteger:cell.tag]];
