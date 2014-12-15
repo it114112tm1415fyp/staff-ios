@@ -30,6 +30,8 @@
 @property (nonatomic, strong) NSMutableArray *listOfID;
 @property (nonatomic, strong) NSMutableDictionary *goodDictionary;
 
-@property (nonatomic, strong) ChooseActionTableViewController *chooseActionController;
+@property (nonatomic, strong) NSString *actionName;
+@property (nonatomic, strong) NSNumber *locationID;
+@property (nonatomic, strong) NSString *locationType;
 
 @end

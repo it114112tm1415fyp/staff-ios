@@ -13,15 +13,17 @@
 + (NSMutableDictionary*)request:(NSString*)postposition;
 + (NSMutableDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters;
 + (NSMutableDictionary*)request:(NSString*)postposition parameters:(NSMutableDictionary*)parameters customParameters:(NSString*)customParameters;
+
 + (NSMutableDictionary*)staffLoginWithUsername:(NSString*)username password:(NSString*)password;
+
 + (NSMutableDictionary*)conveyorGetList;
 + (NSMutableDictionary*)conveyorGetControlWithConveyorId:(NSNumber *)conveyor_id;
 + (NSMutableDictionary*)conveyorSendMessageWithConveyorId:(NSNumber *)conveyor_id message:(NSString *)message;
 
-+ (NSMutableDictionary*)addressGetList;
-+ (NSMutableDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id ;
-+ (NSMutableDictionary*)goodWarehouse:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
-+ (NSMutableDictionary*)goodLeave:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
-+ (NSMutableDictionary*)goodLoad:(NSNumber*)good_id car_id:(NSNumber*)car_id;
-+ (NSMutableDictionary*)goodUnload:(NSNumber*)good_id password:(NSNumber*)car_id;
++ (NSMutableDictionary*)locationGetList;
+
++ (NSMutableDictionary*)goodAction:(NSString*)actionName good_id:(NSNumber*)good_id location_id:(NSNumber*)location_id locationType:(NSString*)locationType;
++ (NSMutableDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id;
++ (NSMutableDictionary*)goodWarehouseLeave:(NSString*)actionType good_id:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type;
++ (NSMutableDictionary*)goodLoadUnload:(NSString*)actionType good_id:(NSNumber*)good_id car_id:(NSNumber*)car_id;
 @end

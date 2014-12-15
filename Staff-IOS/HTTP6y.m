@@ -117,8 +117,19 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
 
 }
 
-+ (NSMutableDictionary*)addressGetList{
-    return [self request:@"address/get_list"];
++ (NSMutableDictionary*)locationGetList{
+    return [self request:@"location/get_list"];
+}
+
++ (NSMutableDictionary*)goodAction:(NSString*)actionName good_id:(NSNumber*)good_id location_id:(NSNumber*)location_id locationType:(NSString*)locationType {
+    if ([actionName isEqual:@"inspect"]) {
+        return [self goodInspect:good_id store_id:location_id];
+    } else if ([actionName isEqual:@"warehouse"] || [actionName isEqual:@"leave"]){
+        return [self goodWarehouseLeave:actionName good_id:good_id location_id:location_id location_type:locationType];
+    }else if ([actionName isEqual:@"load"] || [actionName isEqual:@"unload"]){
+        return [self goodLoadUnload:actionName good_id:good_id car_id:location_id];
+    }
+    return nil;
 }
 
 + (NSMutableDictionary*)goodInspect:(NSNumber*)good_id store_id:(NSNumber*)store_id {
@@ -128,34 +139,19 @@ static NSString* ServerUrl = @"http://it114112tm1415fyp1.redirectme.net:8000/";
     return [self request:@"good/inspect" parameters:parameters];
 }
 
-+ (NSMutableDictionary*)goodWarehouse:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
++ (NSMutableDictionary*)goodWarehouseLeave:(NSString*)actionType good_id:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:good_id forKey:@"good_id"];
     [parameters setObject:location_id forKey:@"location_id"];
     [parameters setObject:location_type forKey:@"location_type"];
-    return [self request:@"good/warehouse" parameters:parameters];
+    return [self request:[@"good/" stringByAppendingString:actionType] parameters:parameters];
 }
 
-+ (NSMutableDictionary*)goodLeave:(NSNumber*)good_id location_id:(NSNumber*)location_id location_type:(NSString*)location_type{
-    NSMutableDictionary* parameters = [NSMutableDictionary new];
-    [parameters setObject:good_id forKey:@"good_id"];
-    [parameters setObject:location_id forKey:@"location_id"];
-    [parameters setObject:location_type forKey:@"location_type"];
-    return [self request:@"good/leave" parameters:parameters];
-}
-
-+ (NSMutableDictionary*)goodLoad:(NSNumber*)good_id car_id:(NSNumber*)car_id {
++ (NSMutableDictionary*)goodLoadUnload:(NSString*)actionType good_id:(NSNumber*)good_id car_id:(NSNumber*)car_id {
     NSMutableDictionary* parameters = [NSMutableDictionary new];
     [parameters setObject:good_id forKey:@"good_id"];
     [parameters setObject:car_id forKey:@"car_id"];
-    return [self request:@"good/load" parameters:parameters];
-}
-
-+ (NSMutableDictionary*)goodUnload:(NSNumber*)good_id password:(NSNumber*)car_id {
-    NSMutableDictionary* parameters = [NSMutableDictionary new];
-    [parameters setObject:good_id forKey:@"good_id"];
-    [parameters setObject:car_id forKey:@"car_id"];
-    return [self request:@"good/unload" parameters:parameters];
+    return [self request:[@"good/" stringByAppendingString:actionType] parameters:parameters];
 }
 
 @end
