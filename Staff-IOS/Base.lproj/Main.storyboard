@@ -180,7 +180,7 @@
             </objects>
             <point key="canvasLocation" x="2430" y="172"/>
         </scene>
-        <!--Item-->
+        <!--Selection-->
         <scene sceneID="52K-Cx-Odk">
             <objects>
                 <tableViewController id="FCx-fQ-2MV" customClass="ChooseActionTableViewController" sceneMemberID="viewController">
@@ -215,7 +215,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="Myl-sE-4rh"/>
-                    <navigationItem key="navigationItem" id="Ytn-7H-HAR"/>
+                    <navigationItem key="navigationItem" title="Selection" id="Ytn-7H-HAR"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Xl-Tu-Lkk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -890,7 +890,7 @@
             </objects>
             <point key="canvasLocation" x="-1015" y="1077"/>
         </scene>
-        <!--QR Code Scanner-->
+        <!--QRCode Scanner-->
         <scene sceneID="P1j-UJ-p0R">
             <objects>
                 <viewController id="jjC-aO-xz5" customClass="QRCodeScannerViewController" sceneMemberID="viewController">
@@ -1088,7 +1088,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="QRCode Scanner" id="wYv-hl-XU8"/>
-                    <navigationItem key="navigationItem" title="QR Code Scanner" id="dJf-Sa-b72"/>
+                    <navigationItem key="navigationItem" id="dJf-Sa-b72"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
@@ -1131,7 +1131,7 @@
             </objects>
             <point key="canvasLocation" x="130" y="1994"/>
         </scene>
-        <!--Choose Goods Table View Controller-->
+        <!--Good List-->
         <scene sceneID="fZQ-Ru-SVH">
             <objects>
                 <tableViewController id="Bah-yZ-ZB0" customClass="ChooseGoodsTableViewController" sceneMemberID="viewController">
@@ -1155,7 +1155,7 @@
                             <outlet property="delegate" destination="Bah-yZ-ZB0" id="ZEq-xQ-w9D"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Jwa-Yn-MN9"/>
+                    <navigationItem key="navigationItem" title="Good List" id="Jwa-Yn-MN9"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYi-gh-Eki" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1400,6 +1400,6 @@
         <image name="up_icon_dis" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jct-nh-Wz6"/>
+        <segue reference="jl2-tI-QJI"/>
     </inferredMetricsTieBreakers>
 </document>
