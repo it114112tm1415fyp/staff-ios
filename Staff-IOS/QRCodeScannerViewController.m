@@ -17,6 +17,10 @@
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @property (nonatomic) BOOL isReading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *departureHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *destinationHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *departureLabelHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *destinationLableHeight;
 
 -(BOOL)startReading;
 -(void)stopReading;
@@ -217,7 +221,13 @@
     _fragileLabel.text = [NSString stringWithFormat:@"%@", goodkey.fragile];
     _flammableLabel.text = [NSString stringWithFormat:@"%@", goodkey.flammable];
     _destinationLabel.text = goodkey.destination;
+    NSLog(@"des:%f",[_destinationLabel.attributedText boundingRectWithSize:CGSizeMake(274, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height);
+    //_destinationHeight.constant = [_destinationLabel.attributedText boundingRectWithSize:CGSizeMake(274, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
+    //_departureLabelHeight.constant = _departureHeight.constant;
     _departureLabel.text = goodkey.departure;
+    NSLog(@"dep:%f",[_departureLabel.attributedText boundingRectWithSize:CGSizeMake(274, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height);
+    //_departureHeight.constant = [_departureLabel.attributedText boundingRectWithSize:CGSizeMake(274, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
+//    _destinationLableHeight.constant = _destinationHeight.constant;
     NSDateFormatter *setDateFormat = [[NSDateFormatter alloc] init];
     [setDateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     _createdTimeLabel.text = [setDateFormat stringFromDate: goodkey.createdTime];

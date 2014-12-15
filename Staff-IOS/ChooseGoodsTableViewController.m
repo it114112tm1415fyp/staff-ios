@@ -88,7 +88,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.tag = [((Good*)[listOfGoods objectAtIndex:indexPath.row]).goodID integerValue];
-    cell.textLabel.text = [((Good*)[listOfGoods objectAtIndex:indexPath.row]).goodID stringValue];
+    cell.textLabel.text = [@"Good " stringByAppendingString:[((Good*)[listOfGoods objectAtIndex:indexPath.row]).goodID stringValue]];
     return cell;
 }
 
