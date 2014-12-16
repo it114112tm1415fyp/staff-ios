@@ -14,8 +14,8 @@
 
 @implementation GoodDetailViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     _idLabel.text = [NSString stringWithFormat:@"%@", _good.goodID];
     _orderIdLabel.text = [NSString stringWithFormat:@"%@", _good.orderID];
     _rfidLabel.text = _good.rfid;

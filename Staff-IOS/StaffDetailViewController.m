@@ -14,9 +14,8 @@
 
 @implementation StaffDetailViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     _staffIdLabel.text = [NSString stringWithFormat:@"%d", [StaffData getStaffId]];
     _staffNameLabel.text = [StaffData getStaffName];
     NSDateFormatter *getDateFormat = [[NSDateFormatter alloc] init];

@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = _actionName;
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ - %@", _actionName, _locationType];
     goodDictionary = [NSMutableDictionary new];
     listOfID = [NSMutableArray new];
     NSLog(@"%@",_locationID);
@@ -61,7 +61,6 @@
         _videoPreviewView.transform = CGAffineTransformMakeRotation(M_PI_2);
     else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
         _videoPreviewView.transform = CGAffineTransformMakeRotation(M_PI +M_PI_2);
-    
 }
 
 - (void)didReceiveMemoryWarning {

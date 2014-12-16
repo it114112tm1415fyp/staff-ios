@@ -18,8 +18,8 @@
 
 @implementation ChooseBeltControllerTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[[NSThread alloc] initWithTarget:self selector:@selector(conveyorGetListThreadMain) object:nil] start];
 }
 

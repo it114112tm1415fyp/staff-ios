@@ -20,8 +20,8 @@
 
 @implementation ChooseLocationTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.navigationItem.title = _actionName;
     [[[NSThread alloc] initWithTarget:self selector:@selector(locationGetListThreadMain) object:nil] start];
 }
